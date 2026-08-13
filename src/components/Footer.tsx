@@ -1,6 +1,6 @@
 import React from 'react';
 import { Logo } from './Logo';
-import { Phone, Mail, MapPin, Clock, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ShieldCheck } from 'lucide-react';
 
 interface FooterProps {
   onOpenBooking: () => void;

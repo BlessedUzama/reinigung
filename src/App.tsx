@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
@@ -6,7 +6,7 @@ import { Features } from './components/Features';
 import { Testimonials } from './components/Testimonials';
 import { PremiumBookingForm } from './components/PremiumBookingForm';
 import { Footer } from './components/Footer';
-import { MessageCircle, Phone, X } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 
 export function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);

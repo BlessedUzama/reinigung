@@ -8,7 +8,6 @@ interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({ className = 'h-12 w-auto', variant = 'color' }) => {
   // Determine fill colors depending on variant or theme
   const primaryFill = variant === 'light' ? '#FFFFFF' : '#074b90';
-  const accentFill = variant === 'light' ? '#3fd2c7' : '#3fd2c7';
 
   return (
     <div className={`flex items-center gap-3 select-none ${className}`}>

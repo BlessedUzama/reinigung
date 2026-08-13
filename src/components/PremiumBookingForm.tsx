@@ -13,7 +13,6 @@ import {
   CheckCircle2, 
   ArrowRight, 
   ArrowLeft, 
-  ShieldCheck, 
   Info, 
   Send 
 } from 'lucide-react';
