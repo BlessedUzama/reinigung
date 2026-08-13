@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 7 75 144;      /* #074b90 */
+    --color-accent: 63 210 199;     /* #3fd2c7 */
+    --color-highlight: 147 220 252; /* #93dcfc */
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight text-corporate-blue;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #074b90;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #042e5b;
+}
+
+/* Smooth Glow Animation */
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+.animate-subtle-pulse {
+  animation: subtle-pulse 4s ease-in-out infinite;
+}
