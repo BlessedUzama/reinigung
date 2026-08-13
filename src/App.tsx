@@ -11,15 +11,6 @@ import { MessageCircle, Phone } from 'lucide-react';
 export function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
-  const scrollToBooking = () => {
-    const bookingElement = document.getElementById('booking-section');
-    if (bookingElement) {
-      bookingElement.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setIsBookingModalOpen(true);
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 selection:bg-aqua-vibrant selection:text-slate-900">
       {/* Top Banner Notice */}
