@@ -56,31 +56,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-3.5 border-b border-slate-100'
-            : 'bg-white py-4 sm:py-5 border-b border-slate-100/80'
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 border-b border-slate-100'
+            : 'bg-white py-2.5 sm:py-3 border-b border-slate-100/80'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo & Title */}
+            {/* Left Side: Brand Logo (Self-contained with typography in SVG) */}
             <a
               href="#"
               aria-label="Obazee Clement Reinigung Startseite"
-              className="flex items-center gap-3 group select-none focus:outline-none"
+              className="flex items-center group select-none focus:outline-none"
             >
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-14 sm:h-16 md:h-18 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
-              <div className="flex flex-col leading-none">
-                <span className="font-heading font-extrabold tracking-wider text-primary text-base sm:text-lg uppercase">
-                  OBAZEE CLEMENT
-                </span>
-                <span className="font-sans font-semibold tracking-widest text-accent text-[11px] uppercase flex items-center gap-1.5 mt-0.5">
-                  REINIGUNG <span className="inline-block w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                </span>
-              </div>
             </a>
 
             {/* Center: Navigation Links (Desktop) */}
@@ -147,21 +139,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
           <div>
             {/* Header row in mobile overlay */}
             <div className="flex items-center justify-between pb-6 border-b border-slate-100">
-              <div className="flex items-center gap-3">
+              <a
+                href="#"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Obazee Clement Reinigung Startseite"
+                className="flex items-center"
+              >
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-9 w-auto object-contain"
+                  className="h-12 w-auto object-contain"
                 />
-                <div className="flex flex-col leading-none">
-                  <span className="font-heading font-extrabold tracking-wider text-primary text-base uppercase">
-                    OBAZEE CLEMENT
-                  </span>
-                  <span className="font-sans font-semibold tracking-widest text-accent text-[10px] uppercase">
-                    REINIGUNG
-                  </span>
-                </div>
-              </div>
+              </a>
 
               <button
                 type="button"
