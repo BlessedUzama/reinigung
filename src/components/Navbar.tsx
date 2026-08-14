@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/icon.svg';
+import brandLogo from '../assets/icon001.svg';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -56,13 +56,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-1.5 sm:py-2 border-b border-slate-100'
-            : 'bg-white py-2 sm:py-3 border-b border-slate-100/80'
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 sm:py-2.5 border-b border-slate-100'
+            : 'bg-white py-3 sm:py-4 border-b border-slate-100/80'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo (Prominent Scale for Crisp Text Legibility) */}
+            {/* Left Side: Brand Logo (Natural Proportion icon001.svg) */}
             <a
               href="#"
               aria-label="Obazee Clement Reinigung Startseite"
@@ -71,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="h-16 sm:h-20 md:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </a>
 
@@ -148,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-16 sm:h-20 w-auto object-contain"
+                  className="h-10 sm:h-12 w-auto object-contain"
                 />
               </a>
 
