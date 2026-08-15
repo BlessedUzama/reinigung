@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/icon001.svg';
+import brandLogo from '../assets/finalCon.svg';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -62,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo (Natural Proportion icon001.svg) */}
+            {/* Left Side: Brand Logo (Cropped & Pristine finalCon.svg) */}
             <a
               href="#"
               aria-label="Obazee Clement Reinigung Startseite"
@@ -71,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </a>
 
@@ -148,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  className="h-12 sm:h-14 w-auto object-contain"
                 />
               </a>
 
