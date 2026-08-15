@@ -62,16 +62,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo (Cropped & Pristine finalCon.svg) */}
-            <a
-              href="#"
-              aria-label="Obazee Clement Reinigung Startseite"
-              className="flex items-center group select-none focus:outline-none flex-shrink-0"
-            >
-              <img
-                src={brandLogo}
-                alt="Obazee Clement Reinigung"
-                className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            {/* Left Side: Brand Logo (Width-based scaling with origin-left) */}
+            <a href="/" className="flex-shrink-0 flex items-center">
+              <img 
+                src={brandLogo} 
+                alt="Obazee Clement Reinigung" 
+                className="w-[160px] sm:w-[200px] md:w-[260px] h-auto object-contain origin-left transform scale-110" 
               />
             </a>
 
@@ -140,15 +136,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
             {/* Header row in mobile overlay */}
             <div className="flex items-center justify-between pb-6 border-b border-slate-100">
               <a
-                href="#"
+                href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                aria-label="Obazee Clement Reinigung Startseite"
-                className="flex items-center"
+                className="flex-shrink-0 flex items-center"
               >
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-12 sm:h-14 w-auto object-contain"
+                  className="w-[180px] sm:w-[220px] h-auto object-contain"
                 />
               </a>
 
