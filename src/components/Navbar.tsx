@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/brand-logo.png';
+import brandLockup from '../assets/brand-lockup.png';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -56,23 +56,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 border-b border-slate-100'
-            : 'bg-white py-2.5 sm:py-3 border-b border-slate-100/80'
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 sm:py-2.5 border-b border-slate-100'
+            : 'bg-white py-3 sm:py-4 border-b border-slate-100/80'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Left Side: Solid-Filled Brand Logo Matching Attached Image */}
-            <a href="/" className="flex-shrink-0 flex items-center h-full py-1.5 group select-none focus:outline-none">
+          <div className="flex items-center justify-between gap-4">
+            {/* Left Side: Brand Lockup with Side Typography (Responsive & Solid-Filled) */}
+            <a href="/" className="flex-shrink-0 flex items-center h-full group select-none focus:outline-none">
               <div
                 className={`transition-all duration-300 ease-in-out transform origin-left ${
-                  isScrolled ? 'scale-95' : 'scale-100'
+                  isScrolled ? 'scale-90 md:scale-90' : 'scale-100'
                 }`}
               >
                 <img 
-                  src={brandLogo} 
+                  src={brandLockup} 
                   alt="Obazee Clement Reinigung" 
-                  className="h-12 sm:h-14 md:h-16 lg:h-18 w-auto max-w-[220px] md:max-w-[300px] object-contain mix-blend-multiply transition-all duration-300 ease-in-out" 
+                  className="w-[180px] sm:w-[220px] md:w-[260px] lg:w-[300px] h-auto object-contain mix-blend-multiply transition-all duration-300 ease-in-out" 
                 />
               </div>
             </a>
@@ -147,9 +147,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 className="flex-shrink-0 flex items-center"
               >
                 <img
-                  src={brandLogo}
+                  src={brandLockup}
                   alt="Obazee Clement Reinigung"
-                  className="h-12 sm:h-14 w-auto max-w-[200px] object-contain mix-blend-multiply"
+                  className="w-[200px] sm:w-[240px] h-auto object-contain mix-blend-multiply"
                 />
               </a>
 
