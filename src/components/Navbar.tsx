@@ -56,23 +56,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 sm:py-2.5 border-b border-slate-100'
-            : 'bg-white py-3.5 sm:py-4.5 border-b border-slate-100/80'
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 border-b border-slate-100'
+            : 'bg-white py-2.5 sm:py-3 border-b border-slate-100/80'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo with dynamic scroll-based scaling (Reference Site Pattern) */}
-            <a href="/" className="flex-shrink-0 flex items-center group select-none focus:outline-none">
+            {/* Left Side: Brand Logo with strict height constraints */}
+            <a href="/" className="flex-shrink-0 flex items-center h-full py-2 group select-none focus:outline-none">
               <div
                 className={`transition-all duration-300 ease-in-out transform origin-left ${
-                  isScrolled ? 'scale-90 md:scale-90' : 'scale-100'
+                  isScrolled ? 'scale-95' : 'scale-100'
                 }`}
               >
                 <img 
                   src={brandLogo} 
                   alt="Obazee Clement Reinigung" 
-                  className="w-[170px] sm:w-[210px] md:w-[260px] h-auto object-contain transition-all duration-300 ease-in-out" 
+                  className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto max-w-[200px] md:max-w-[280px] object-contain transition-all duration-300 ease-in-out" 
                 />
               </div>
             </a>
@@ -149,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="w-[180px] sm:w-[220px] h-auto object-contain"
+                  className="h-12 sm:h-14 w-auto max-w-[200px] object-contain"
                 />
               </a>
 
