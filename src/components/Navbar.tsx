@@ -12,7 +12,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 15) {
+      if (window.scrollY > 20) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -54,21 +54,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
   return (
     <>
       <header
-        className={`sticky top-0 z-40 w-full transition-all duration-300 ${
+        className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 sm:py-2.5 border-b border-slate-100'
-            : 'bg-white py-3 sm:py-4 border-b border-slate-100/80'
+            : 'bg-white py-3.5 sm:py-4.5 border-b border-slate-100/80'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo (Width-based scaling with origin-left) */}
-            <a href="/" className="flex-shrink-0 flex items-center">
-              <img 
-                src={brandLogo} 
-                alt="Obazee Clement Reinigung" 
-                className="w-[160px] sm:w-[200px] md:w-[260px] h-auto object-contain origin-left transform scale-110" 
-              />
+            {/* Left Side: Brand Logo with dynamic scroll-based scaling (Reference Site Pattern) */}
+            <a href="/" className="flex-shrink-0 flex items-center group select-none focus:outline-none">
+              <div
+                className={`transition-all duration-300 ease-in-out transform origin-left ${
+                  isScrolled ? 'scale-90 md:scale-90' : 'scale-100'
+                }`}
+              >
+                <img 
+                  src={brandLogo} 
+                  alt="Obazee Clement Reinigung" 
+                  className="w-[170px] sm:w-[210px] md:w-[260px] h-auto object-contain transition-all duration-300 ease-in-out" 
+                />
+              </div>
             </a>
 
             {/* Center: Navigation Links (Desktop) */}
