@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/newq.svg';
+import brandLogo from '../assets/omo.svg';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -62,7 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo (newq.svg with Brand Palette) */}
+            {/* Left Side: Brand Logo (omo.svg) */}
             <a href="/" className="flex-shrink-0 flex items-center h-full py-1.5 group select-none focus:outline-none">
               <div
                 className={`transition-all duration-300 ease-in-out transform origin-left ${
@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img 
                   src={brandLogo} 
                   alt="Obazee Clement Reinigung" 
-                  className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto max-w-[200px] md:max-w-[280px] object-contain transition-all duration-300 ease-in-out" 
+                  className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto max-w-[220px] md:max-w-[300px] object-contain transition-all duration-300 ease-in-out" 
                 />
               </div>
             </a>
