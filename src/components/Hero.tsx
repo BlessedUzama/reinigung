@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ChevronRight, ShieldCheck, CheckCircle2, Star, Sparkles, Clock } from 'lucide-react';
+import { ArrowRight, ChevronRight, ShieldCheck, CheckCircle2, Star, Clock } from 'lucide-react';
 
 // [STATE MANAGEMENT RULE]:
 // All future state (such as the multi-step dynamic booking wizard triggered by Button 1)
@@ -33,14 +33,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
           
           {/* Left Column: Copy & Conversion */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
-            
-            {/* Trust Pill Badge (Broad & Premium) */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-highlight/25 border border-highlight/50 text-[#074b90] text-xs sm:text-sm font-semibold mb-6 shadow-sm">
-              <Sparkles className="w-4 h-4 text-[#3fd2c7]" />
-              <span>Ihr Meisterbetrieb für erstklassige Sauberkeit & Werterhalt</span>
-            </div>
 
-            {/* Main Headline */}
+            {/* Main Headline (Top Element in Left Column) */}
             <h1 className="font-heading font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#074b90] leading-[1.12] tracking-tight">
               Professionalität, die man sieht.{' '}
               <span className="text-slate-900 block mt-2 sm:mt-3">
@@ -100,11 +94,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
               {/* Decorative Accent Glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#3fd2c7] to-[#074b90] rounded-3xl opacity-20 blur-xl -z-10" />
 
-              {/* Main Real-World Image */}
+              {/* Main Real-World Image (Modern Sparkling Interior) */}
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-100">
                 <img
-                  src="https://images.unsplash.com/photo-1598124146163-36819847286d?q=80&w=2070&auto=format&fit=crop"
-                  alt="Professionelle und streifenfreie Gebäudereinigung - Obazee Clement Reinigung"
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+                  alt="Professionelle und streifenfreie Reinigung - Obazee Clement Reinigung"
                   className="w-full h-[380px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 hover:scale-105"
                   loading="eager"
                 />
@@ -113,7 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
               </div>
 
-              {/* Floating Trust Card 1: Ratings */}
+              {/* Floating Trust Card: Ratings (5.0 Kundenzufriedenheit) */}
               <div className="absolute -top-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
                 <div className="p-2.5 rounded-xl bg-amber-50 text-amber-500">
                   <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
