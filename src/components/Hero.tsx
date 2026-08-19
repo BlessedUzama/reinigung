@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ChevronRight, ShieldCheck, CheckCircle2, Star, Sparkles, Clock, MapPin } from 'lucide-react';
+import { ArrowRight, ChevronRight, ShieldCheck, CheckCircle2, Star, Sparkles, Clock } from 'lucide-react';
 
 // [STATE MANAGEMENT RULE]:
 // All future state (such as the multi-step dynamic booking wizard triggered by Button 1)
@@ -34,10 +34,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
           {/* Left Column: Copy & Conversion */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
-            {/* Trust Pill Badge */}
+            {/* Trust Pill Badge (Broad & Premium) */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-highlight/25 border border-highlight/50 text-[#074b90] text-xs sm:text-sm font-semibold mb-6 shadow-sm">
               <Sparkles className="w-4 h-4 text-[#3fd2c7]" />
-              <span>Ihr Meisterbetrieb für Sauberkeit in Frankfurt & Umgebung</span>
+              <span>Ihr Meisterbetrieb für erstklassige Sauberkeit & Werterhalt</span>
             </div>
 
             {/* Main Headline */}
@@ -50,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
 
             {/* Supportive Paragraph */}
             <p className="font-sans text-base sm:text-lg text-slate-700 leading-relaxed max-w-2xl mt-6">
-              Obazee Clement Reinigung bietet erstklassigen Reinigungsservice für Privat- und Geschäftskunden in Frankfurt und Umgebung. Wir stehen für Gründlichkeit, Zuverlässigkeit und transparente Preise.
+              Obazee Clement Reinigung bietet erstklassigen Reinigungsservice für Privat- und Geschäftskunden. Wir stehen für Gründlichkeit, Zuverlässigkeit und transparente Preise.
             </p>
 
             {/* CTA Buttons (Strict DOM Flattening Applied) */}
@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-100">
                 <img
                   src="https://images.unsplash.com/photo-1598124146163-36819847286d?q=80&w=2070&auto=format&fit=crop"
-                  alt="Professionelle und streifenfreie Gebäudereinigung in Frankfurt - Obazee Clement Reinigung"
+                  alt="Professionelle und streifenfreie Gebäudereinigung - Obazee Clement Reinigung"
                   className="w-full h-[380px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 hover:scale-105"
                   loading="eager"
                 />
@@ -128,17 +128,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
                     </div>
                   </div>
                   <p className="text-slate-500 text-xs font-sans">Höchste Kundenzufriedenheit</p>
-                </div>
-              </div>
-
-              {/* Floating Trust Card 2: Region */}
-              <div className="absolute -bottom-4 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-highlight/30 text-primary">
-                  <MapPin className="w-5 h-5 text-[#074b90]" />
-                </div>
-                <div>
-                  <p className="font-heading font-bold text-slate-900 text-xs sm:text-sm">Frankfurt & Rhein-Main</p>
-                  <p className="text-[#3fd2c7] text-xs font-semibold">Schnell vor Ort</p>
                 </div>
               </div>
 

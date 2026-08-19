@@ -62,18 +62,39 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Brand Logo (omo.svg) */}
-            <a href="/" className="flex-shrink-0 flex items-center h-full py-1.5 group select-none focus:outline-none">
+            {/* Left Side: Brand Emblem + Typographic Lockup */}
+            <a href="/" className="flex-shrink-0 flex flex-row items-center h-full py-1 group select-none focus:outline-none">
               <div
-                className={`transition-all duration-300 ease-in-out transform origin-left ${
+                className={`flex flex-row items-center transition-all duration-300 ease-in-out transform origin-left ${
                   isScrolled ? 'scale-95' : 'scale-100'
                 }`}
               >
                 <img 
                   src={brandLogo} 
                   alt="Obazee Clement Reinigung" 
-                  className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto max-w-[220px] md:max-w-[300px] object-contain transition-all duration-300 ease-in-out" 
+                  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-all duration-300 ease-in-out" 
                 />
+
+                <div className="flex flex-col justify-center ml-2.5 sm:ml-3.5 select-none">
+                  {/* Line 1: Main Brand Name */}
+                  <span className="font-heading font-extrabold text-[#074b90] text-base sm:text-lg md:text-xl lg:text-2xl leading-none uppercase tracking-wide">
+                    Obazee Clement
+                  </span>
+                  
+                  {/* Line 2: Service with flanking lines */}
+                  <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-1">
+                    <div className="h-[2px] w-full bg-[#3fd2c7]"></div>
+                    <span className="font-heading font-bold text-[#3fd2c7] text-[10px] sm:text-xs md:text-sm lg:text-base tracking-[0.2em] leading-none uppercase whitespace-nowrap">
+                      Reinigung
+                    </span>
+                    <div className="h-[2px] w-full bg-[#3fd2c7]"></div>
+                  </div>
+                  
+                  {/* Line 3: Tagline */}
+                  <span className="font-sans font-medium text-[#074b90] text-[7px] sm:text-[8px] md:text-[10px] tracking-widest uppercase mt-1 text-center whitespace-nowrap">
+                    Sauber &bull; Zuverlässig &bull; Professionell
+                  </span>
+                </div>
               </div>
             </a>
 
@@ -144,13 +165,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
               <a
                 href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex-shrink-0 flex items-center"
+                className="flex-shrink-0 flex flex-row items-center"
               >
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-12 sm:h-14 w-auto max-w-[200px] object-contain"
+                  className="h-10 sm:h-12 w-auto object-contain"
                 />
+                <div className="flex flex-col justify-center ml-2.5 select-none">
+                  <span className="font-heading font-extrabold text-[#074b90] text-base sm:text-lg leading-none uppercase tracking-wide">
+                    Obazee Clement
+                  </span>
+                  <div className="flex items-center justify-center gap-1.5 mt-1">
+                    <div className="h-[2px] w-full bg-[#3fd2c7]"></div>
+                    <span className="font-heading font-bold text-[#3fd2c7] text-[10px] sm:text-xs tracking-[0.2em] leading-none uppercase whitespace-nowrap">
+                      Reinigung
+                    </span>
+                    <div className="h-[2px] w-full bg-[#3fd2c7]"></div>
+                  </div>
+                  <span className="font-sans font-medium text-[#074b90] text-[7px] sm:text-[8px] tracking-widest uppercase mt-1 text-center whitespace-nowrap">
+                    Sauber &bull; Zuverlässig &bull; Professionell
+                  </span>
+                </div>
               </a>
 
               <button
