@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/omo.svg';
+import brandLogo from '../assets/FINAL.png';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -62,47 +62,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* Left Side: Chunky, Reference-Matched Brand Lockup */}
-            <a href="/" className="flex flex-row items-center gap-2 sm:gap-3 select-none group focus:outline-none">
-              {/* 1. The SVG Icon */}
+            {/* Left Side: Brand Logo (FINAL.png containing emblem and typography) */}
+            <a href="/" className="flex-shrink-0 flex items-center select-none group focus:outline-none py-1">
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="h-10 sm:h-12 md:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto max-w-[200px] sm:max-w-[260px] md:max-w-[320px] object-contain transition-transform duration-300 group-hover:scale-105"
               />
-
-              {/* 2. The Text Block (Beefed up, vertically scaled, perfectly proportioned) */}
-              <div className="flex flex-col justify-center ml-1 sm:ml-2 w-[150px] sm:w-[210px] md:w-[270px] select-none">
-
-                {/* Line 1: OBAZEE CLEMENT (Tall, chunky, dark blue) */}
-                <span className="font-heading font-black text-[#074b90] text-[16px] sm:text-[22px] md:text-[29px] leading-[0.85] uppercase tracking-tighter transform scale-y-[1.15] origin-bottom text-center">
-                  Obazee Clement
-                </span>
-
-                {/* Line 2: - REINIGUNG - (Bright blue, heavy lines) */}
-                <div className="flex items-center justify-between gap-1.5 sm:gap-2 mt-1 sm:mt-1.5">
-                  <div className="h-[2px] sm:h-[3px] flex-grow bg-[#0ea5e9]"></div>
-                  <span className="font-heading font-black text-[#0ea5e9] text-[8.5px] sm:text-[12px] md:text-[15px] tracking-[0.2em] leading-none uppercase">
-                    Reinigung
-                  </span>
-                  <div className="h-[2px] sm:h-[3px] flex-grow bg-[#0ea5e9]"></div>
-                </div>
-
-                {/* Line 3: SAUBER • ZUVERLÄSSIG • PROFESSIONELL */}
-                <div className="flex items-center justify-between w-full mt-1 sm:mt-1.5 px-0.5">
-                  <span className="font-sans font-bold text-[#074b90] text-[5px] sm:text-[7px] md:text-[9px] tracking-wider uppercase whitespace-nowrap">
-                    Sauber
-                  </span>
-                  <span className="text-[#0ea5e9] text-[5px] sm:text-[7px] md:text-[9px]">•</span>
-                  <span className="font-sans font-bold text-[#074b90] text-[5px] sm:text-[7px] md:text-[9px] tracking-wider uppercase whitespace-nowrap">
-                    Zuverlässig
-                  </span>
-                  <span className="text-[#0ea5e9] text-[5px] sm:text-[7px] md:text-[9px]">•</span>
-                  <span className="font-sans font-bold text-[#074b90] text-[5px] sm:text-[7px] md:text-[9px] tracking-wider uppercase whitespace-nowrap">
-                    Professionell
-                  </span>
-                </div>
-              </div>
             </a>
 
             {/* Center: Navigation Links (Desktop) */}
@@ -172,38 +138,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
               <a
                 href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex flex-row items-center gap-2.5 select-none"
+                className="flex-shrink-0 flex items-center select-none"
               >
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-10 sm:h-12 w-auto object-contain"
+                  className="h-10 sm:h-12 w-auto max-w-[220px] object-contain"
                 />
-                <div className="flex flex-col justify-center w-[150px] sm:w-[180px] pt-0.5">
-                  <span className="font-heading font-black text-[#074b90] text-[15px] sm:text-[18px] leading-[1] uppercase tracking-[-0.01em]">
-                    Obazee Clement
-                  </span>
-                  <div className="flex items-center justify-between gap-1 mt-[2px]">
-                    <div className="h-[1.5px] flex-grow bg-[#0ea5e9]"></div>
-                    <span className="font-heading font-extrabold text-[#0ea5e9] text-[8px] sm:text-[10px] tracking-[0.25em] leading-none uppercase">
-                      Reinigung
-                    </span>
-                    <div className="h-[1.5px] flex-grow bg-[#0ea5e9]"></div>
-                  </div>
-                  <div className="flex items-center justify-between w-full mt-[2px]">
-                    <span className="font-sans font-bold text-[#074b90] text-[5px] sm:text-[6.5px] tracking-[0.1em] uppercase whitespace-nowrap">
-                      Sauber
-                    </span>
-                    <span className="text-[#0ea5e9] text-[5px] sm:text-[6.5px]">•</span>
-                    <span className="font-sans font-bold text-[#074b90] text-[5px] sm:text-[6.5px] tracking-[0.1em] uppercase whitespace-nowrap">
-                      Zuverlässig
-                    </span>
-                    <span className="text-[#0ea5e9] text-[5px] sm:text-[6.5px]">•</span>
-                    <span className="font-sans font-bold text-[#074b90] text-[5px] sm:text-[6.5px] tracking-[0.1em] uppercase whitespace-nowrap">
-                      Professionell
-                    </span>
-                  </div>
-                </div>
               </a>
 
               <button
