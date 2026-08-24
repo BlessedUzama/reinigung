@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto max-w-[200px] sm:max-w-[260px] md:max-w-[320px] object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-14 sm:h-16 md:h-20 lg:h-24 w-auto max-w-[240px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[480px] object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </a>
 
@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-10 sm:h-12 w-auto max-w-[220px] object-contain"
+                  className="h-12 sm:h-14 w-auto max-w-[220px] sm:max-w-[260px] object-contain"
                 />
               </a>
 
