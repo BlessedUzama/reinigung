@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/LAST.svg';
+import brandLogo from '../assets/FINAL.png';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -61,18 +61,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Left Side: Brand Logo — dynamic scroll-scale, origin-left, width-driven sizing */}
+          <div className="flex items-center justify-between py-3 sm:py-3.5">
+            {/* Left Side: Brand Logo (Vibrant Asset with Sleek Responsive Scaling) */}
             <a href="/" className="flex-shrink-0 flex items-center select-none focus:outline-none">
               <div
                 className={`transition-all duration-300 ease-in-out transform origin-left ${
-                  isScrolled ? 'scale-[0.85] md:scale-[0.85]' : 'scale-100'
+                  isScrolled ? 'scale-90' : 'scale-100'
                 }`}
               >
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="w-[200px] sm:w-[280px] md:w-[360px] lg:w-[420px] h-auto object-contain"
+                  className="w-[130px] sm:w-[165px] md:w-[195px] lg:w-[220px] h-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                 />
               </div>
             </a>
@@ -149,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-9 sm:h-10 w-auto max-w-[180px] sm:max-w-[220px] object-contain"
+                  className="w-[140px] sm:w-[165px] h-auto object-contain"
                 />
               </a>
 
