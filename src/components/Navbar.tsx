@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/LAST.svg';
+import brandLogo from '../assets/FINAL.png';
 
 interface NavbarProps {
   onCtaClick?: () => void;
@@ -60,13 +60,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
             : 'bg-white py-2.5 sm:py-3'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-[72px]">
-          {/* Left Side: Brand Vector Logo (Vibrant recolored LAST.svg with zero dead whitespace) */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-20">
+          {/* Left Side: Brand Logo (Vibrant FINAL.png with full depth & typography) */}
           <a href="/" className="flex-shrink-0 flex items-center select-none focus:outline-none py-1">
             <img
               src={brandLogo}
               alt="Obazee Clement Reinigung"
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </a>
 
