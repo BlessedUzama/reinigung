@@ -62,13 +62,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Left Side: Brand Logo (FINAL.png containing emblem and typography) */}
-            <a href="/" className="flex-shrink-0 flex items-center select-none group focus:outline-none py-1">
-              <img
-                src={brandLogo}
-                alt="Obazee Clement Reinigung"
-                className="h-9 sm:h-10 md:h-12 w-auto max-w-[180px] sm:max-w-[220px] md:max-w-[260px] object-contain transition-transform duration-300 group-hover:scale-105"
-              />
+            {/* Left Side: Brand Logo — scales down on scroll, origin-left, reference-site style */}
+            <a href="/" className="flex-shrink-0 flex items-center select-none group focus:outline-none">
+              <div
+                className={`transition-transform duration-300 ease-in-out origin-left ${
+                  isScrolled ? 'scale-[0.72]' : 'scale-100'
+                }`}
+              >
+                <img
+                  src={brandLogo}
+                  alt="Obazee Clement Reinigung"
+                  className="h-12 sm:h-14 md:h-16 w-auto max-w-[220px] sm:max-w-[280px] md:max-w-[340px] object-contain"
+                />
+              </div>
             </a>
 
             {/* Center: Navigation Links (Desktop) */}
