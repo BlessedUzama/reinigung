@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Phone, ShieldCheck, ChevronRight } from 'lucide-react';
-import brandLogo from '../assets/FINAL.png';
+import brandLogo from '../assets/LAST.svg';
 
 interface NavbarProps {
   onCtaClick?: () => void;
