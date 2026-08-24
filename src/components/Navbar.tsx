@@ -61,13 +61,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 sm:h-20">
-          {/* Left Side: Brand Logo with Optical Scale Crop */}
-          <a href="/" className="flex-shrink-0 flex items-center justify-center select-none focus:outline-none w-[150px] sm:w-[190px] md:w-[240px] h-12 sm:h-14">
-            <div className={`transition-transform duration-300 transform flex items-center justify-center w-full h-full ${isScrolled ? 'scale-95' : 'scale-100'}`}>
+          {/* Left Side: Brand Logo with origin-left optical scale */}
+          <a href="/" className="flex-shrink-0 flex items-center select-none focus:outline-none h-12 sm:h-14 w-[160px] sm:w-[190px] md:w-[220px]">
+            <div className={`transition-transform duration-300 flex items-center w-full h-full ${isScrolled ? 'scale-95' : 'scale-100'}`}>
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="w-full h-auto object-contain transform scale-[2] sm:scale-[2.2] md:scale-[2.5] origin-center pointer-events-none"
+                className="w-full h-auto object-contain transform scale-[1.35] sm:scale-[1.5] md:scale-[1.65] origin-left pointer-events-none"
               />
             </div>
           </a>
@@ -138,12 +138,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
               <a
                 href="/"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="flex-shrink-0 flex items-center justify-center select-none w-[150px] sm:w-[180px] h-12 overflow-hidden"
+                className="flex-shrink-0 flex items-center select-none h-12 w-[160px] overflow-hidden"
               >
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="w-full h-auto object-contain transform scale-[2] origin-center pointer-events-none"
+                  className="w-full h-auto object-contain transform scale-[1.35] origin-left pointer-events-none"
                 />
               </a>
 
