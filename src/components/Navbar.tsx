@@ -56,18 +56,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ease-in-out ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] py-2 border-b border-slate-100'
-            : 'bg-white py-2.5 sm:py-3 border-b border-slate-100/80'
+            ? 'bg-white/95 backdrop-blur-md shadow-[0_4px_24px_-4px_rgba(7,75,144,0.08)] border-b border-slate-100'
+            : 'bg-white border-b border-slate-100/80'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between h-20">
             {/* Left Side: Brand Logo (FINAL.png containing emblem and typography) */}
             <a href="/" className="flex-shrink-0 flex items-center select-none group focus:outline-none py-1">
               <img
                 src={brandLogo}
                 alt="Obazee Clement Reinigung"
-                className="h-14 sm:h-16 md:h-20 lg:h-24 w-auto max-w-[240px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-[480px] object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-9 sm:h-10 md:h-12 w-auto max-w-[180px] sm:max-w-[220px] md:max-w-[260px] object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </a>
 
@@ -143,7 +143,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
                 <img
                   src={brandLogo}
                   alt="Obazee Clement Reinigung"
-                  className="h-12 sm:h-14 w-auto max-w-[220px] sm:max-w-[260px] object-contain"
+                  className="h-9 sm:h-10 w-auto max-w-[180px] sm:max-w-[220px] object-contain"
                 />
               </a>
 
