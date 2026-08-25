@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, ChevronRight, ShieldCheck, CheckCircle2, Star, Clock } from 'lucide-react';
+import { ArrowRight, ChevronRight, ShieldCheck, CheckCircle2, Clock } from 'lucide-react';
 
 // [STATE MANAGEMENT RULE]:
 // All future state (such as the multi-step dynamic booking wizard triggered by Button 1)
@@ -23,7 +23,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 py-12 sm:py-16 lg:py-20">
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 pt-4 sm:pt-6 pb-12 sm:pb-16">
       {/* Ambient background decoration */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-highlight/15 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -94,35 +94,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
               {/* Decorative Accent Glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#3fd2c7] to-[#074b90] rounded-3xl opacity-20 blur-xl -z-10" />
 
-              {/* Main Real-World Image (Modern Sparkling Interior) */}
-              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-100">
+              {/* Main Real-World Image (Professional Cleaning Context) */}
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-50">
                 <img
-                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-                  alt="Professionelle und streifenfreie Reinigung - Obazee Clement Reinigung"
-                  className="w-full h-[380px] sm:h-[460px] lg:h-[500px] object-cover transition-transform duration-700 hover:scale-105"
-                  loading="eager"
+                  src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80"
+                  alt="Professioneller Reinigungsservice Obazee Clement"
+                  className="w-full h-[360px] sm:h-[440px] md:h-[500px] lg:h-[540px] object-cover object-center"
                 />
-
-                {/* Subtle Gradient Vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-
-              {/* Floating Trust Card: Ratings (5.0 Kundenzufriedenheit) */}
-              <div className="absolute -top-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3">
-                <div className="p-2.5 rounded-xl bg-amber-50 text-amber-500">
-                  <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-1">
-                    <span className="font-heading font-extrabold text-slate-900 text-sm sm:text-base">5.0</span>
-                    <div className="flex text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                  </div>
-                  <p className="text-slate-500 text-xs font-sans">Höchste Kundenzufriedenheit</p>
-                </div>
               </div>
 
             </div>
