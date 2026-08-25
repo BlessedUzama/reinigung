@@ -3,12 +3,9 @@ import {
   Sparkles,
   Building2,
   Maximize,
-  Zap,
-  Hammer,
-  Layers,
   CheckCircle2,
   ArrowRight,
-  MessageCircle,
+  Mail,
   Phone,
   ShieldCheck
 } from 'lucide-react';
@@ -24,81 +21,42 @@ interface ServiceItem {
 
 const servicesData: ServiceItem[] = [
   {
-    id: 'unterhalt',
-    title: 'Unterhaltsreinigung',
-    badge: 'Privat & Gewerbe',
+    id: 'unterhalt-privat',
+    title: 'Unterhalts- & Privatreinigung',
+    badge: 'Privat & Wohnen',
     icon: Sparkles,
-    description: 'Regelmäßige Pflege für makellose Sauberkeit in Wohnungen, Häusern und Geschäftsräumen nach Ihrem individuellen Wunschrhythmus.',
+    description: 'Zuverlässige und regelmäßige Pflege für ein makellos sauberes Zuhause. Wir sorgen für Wohlfühlatmosphäre nach Ihrem Wunschzeitplan.',
     features: [
-      'Böden fachgerecht saugen & feucht wischen',
-      'Staubwischen & Desinfektion aller Oberflächen',
-      'Komplette Sanitär- & Küchenhygiene',
-      'Müllentsorgung & Bereitstellung von Verbrauchsmaterial'
+      'Regelmäßige Grund- & Unterhaltspflege',
+      'Gründliche Sanitär- & Küchenhygiene',
+      'Böden saugen, wischen & Oberflächenpflege',
+      'Flexible Reinigungsintervalle nach Absprache'
     ]
   },
   {
-    id: 'buero-praxis',
-    title: 'Büro- & Praxisreinigung',
-    badge: 'Gewerbe & Hygiene',
+    id: 'buero-gewerbe',
+    title: 'Büro- & Gewerbereinigung',
+    badge: 'Gewerbe & Praxis',
     icon: Building2,
-    description: 'Hygienisch reine Arbeitswelten für maximale Produktivität und einen erstklassigen Eindruck bei Kunden, Patienten und Mitarbeitern.',
+    description: 'Repräsentative Sauberkeit und kompromisslose Hygiene für Büros, Kanzleien, Praxen und gewerbliche Räumlichkeiten in Frankfurt.',
     features: [
-      'Strenge Hygiene- & Desinfektionsstandards',
-      'Schreibtisch-, Empfangs- & IT-Reinigung',
-      'Sanitäranlagen, Pausenräume & Teeküchen',
-      'Flexible Einsatzzeiten außerhalb der Geschäftszeiten'
+      'Tägliche oder wöchentliche Büroreinigung',
+      'Hygienische Desinfektion von Arbeitsplätzen & IT',
+      'Praxis- & Kanzleipflege nach Hygieneplan',
+      'Reinigungszeiten flexibel außerhalb Ihrer Geschäftszeiten'
     ]
   },
   {
-    id: 'glas-fenster',
-    title: 'Fenster- & Glasreinigung',
-    badge: 'Streifenfrei',
+    id: 'glas-spezial',
+    title: 'Glas- & Spezialreinigung',
+    badge: 'Streifenfrei & Spezial',
     icon: Maximize,
-    description: 'Kristallklare Durchsicht für Fenster, Schaufenster, Glasfassaden und Wintergärten – zuverlässig und garantiert streifenfrei.',
+    description: 'Professionelle Fenster- und Glasreinigung sowie gründliche Bauabschluss- und Einzugsreinigungen für höchste Ansprüche.',
     features: [
-      'Inklusive Fensterrahmen, Falzen & Fensterbänken',
-      'Schaufenster, Glastrennwände & Glasfassaden',
-      'Wintergärten & anspruchsvolle Glasüberdachungen',
-      'Schonende, umweltfreundliche Reinigungstechnik'
-    ]
-  },
-  {
-    id: 'grundreinigung',
-    title: 'Grund- & Intensivreinigung',
-    badge: 'Tiefenreinigung',
-    icon: Zap,
-    description: 'Umfassende Tiefenreinigung für hartnäckige Verschmutzungen, nach Mieterwechseln oder als saisonaler Großputz.',
-    features: [
-      'Intensive Boden-, Fugen- & Fliesenbehandlung',
-      'Kalk-, Fett- & Problemzonen-Beseitigung',
-      'Türen, Zargen, Fußleisten & Heizkörper',
-      'Geruchsneutralisation & Frischeversiegelung'
-    ]
-  },
-  {
-    id: 'baureinigung',
-    title: 'Bau- & Renovierungsreinigung',
-    badge: 'Bauabnahme',
-    icon: Hammer,
-    description: 'Gründliche Grob- und Feinreinigung nach Neubau, Umbau oder Renovierung für eine reibungslose, schlüsselfertige Übergabe.',
-    features: [
-      'Baugrobreinigung & Bauschutt-Beseitigung',
-      'Bauschlussreinigung für bezugsfertige Übergabe',
-      'Entfernung von Farb-, Mörtel-, Kleber- & Silikonresten',
-      'Feinstaubabsaugung aller Flächen und Nischen'
-    ]
-  },
-  {
-    id: 'treppenhaus',
-    title: 'Treppenhaus- & Objektbetreuung',
-    badge: 'Hausverwaltung',
-    icon: Layers,
-    description: 'Zuverlässige Pflege von Treppenhäusern und Gemeinschaftsflächen für Mehrfamilienhäuser, Wohnanlagen und Gewerbeobjekte.',
-    features: [
-      'Kehren & Feuchtwischen sämtlicher Etagen',
-      'Handläufe, Geländer, Leuchten & Schalter',
-      'Eingangsbereiche, Briefkasten- & Klingelanlagen',
-      'Regelmäßige Qualitäts- & Sichtkontrollen'
+      'Streifenfreie Fenster- & Schaufensterreinigung',
+      'Baugrob- & Bauschlussreinigung nach Renovierung',
+      'Intensive Grundreinigung bei Ein- & Auszug',
+      'Treppenhaus- & Gemeinschaftsflächenbetreuung'
     ]
   }
 ];
@@ -115,6 +73,10 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
       const target = document.getElementById('booking') || document.getElementById('contact');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.location.href = `mailto:info@obazee-clement-reinigung.de?subject=${encodeURIComponent(
+          `Reinigungsanfrage - ${serviceTitle}`
+        )}`;
       }
     }
   };
@@ -129,9 +91,9 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-4 font-heading">
             <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0" />
-            <span>Erstklassige Reinigungsdienste</span>
+            <span>Unsere Kernleistungen</span>
           </div>
 
           <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-[1.15]">
@@ -140,12 +102,12 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
           </h2>
 
           <p className="font-sans text-base sm:text-lg text-slate-600 leading-relaxed mt-5">
-            Entdecken Sie unser breites Spektrum an maßgeschneiderten Reinigungslösungen. Ob privater Haushalt oder Gewerbeobjekt – wir garantieren höchste Gründlichkeit und Zuverlässigkeit.
+            Entdecken Sie unsere drei maßgeschneiderten Hauptbereiche. Ob privater Haushalt oder Gewerbeobjekt – wir garantieren höchste Gründlichkeit, Pünktlichkeit und faire Festpreise.
           </p>
         </div>
 
-        {/* 6-Card Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* 3-Card Flagship Grid (Clean Single-Row on Desktop) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {servicesData.map((service) => {
             const Icon = service.icon;
             return (
@@ -199,7 +161,7 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
           })}
         </div>
 
-        {/* Bottom Callout Banner: Tailored Concept & WhatsApp */}
+        {/* Bottom Callout Banner: Tailored Concept & Email Contact */}
         <div className="mt-16 sm:mt-20 rounded-3xl bg-gradient-to-r from-[#053a6e] via-[#074b90] to-[#0a5ca8] p-8 sm:p-12 lg:p-14 text-white shadow-2xl relative overflow-hidden border border-white/10">
           {/* Subtle background glow circle */}
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
@@ -214,19 +176,17 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 Ihr maßgeschneidertes Reinigungskonzept
               </h3>
               <p className="font-sans text-sm sm:text-base text-slate-200 leading-relaxed mt-3">
-                Benötigen Sie ein spezielles Leistungspaket, feste Turnusse oder einen Wochenend-Service? Schreiben Sie uns direkt auf WhatsApp oder fordern Sie Ihr persönliches Festpreisangebot an.
+                Benötigen Sie ein maßgeschneidertes Reinigungskonzept oder feste Turnusse? Senden Sie uns eine E-Mail oder rufen Sie uns direkt an.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-4 w-full lg:w-auto flex-shrink-0">
               <a
-                href="https://wa.me/4915210236967"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-slate-950 font-heading font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer whitespace-nowrap"
+                href="mailto:info@obazee-clement-reinigung.de?subject=Individuelle%20Reinigungsanfrage"
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#00a3e0] hover:bg-[#0284c7] text-white font-heading font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer whitespace-nowrap"
               >
-                <MessageCircle className="w-5 h-5 text-slate-950 flex-shrink-0" />
-                <span>WhatsApp Direktkontakt</span>
+                <Mail className="w-5 h-5 text-white flex-shrink-0" />
+                <span>E-Mail Anfrage senden</span>
               </a>
 
               <a
