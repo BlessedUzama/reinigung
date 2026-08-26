@@ -15,7 +15,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
     if (onOpenBookingModal) {
       onOpenBookingModal();
     } else {
-      const target = document.getElementById('booking') || document.getElementById('contact');
+      const target = document.getElementById('angebot') || document.getElementById('contact');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
       }

@@ -70,9 +70,10 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
     if (onSelectService) {
       onSelectService(serviceTitle);
     } else {
-      const target = document.getElementById('booking') || document.getElementById('contact');
+      const target = document.getElementById('angebot') || document.getElementById('contact');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
+        window.dispatchEvent(new CustomEvent('selectCleaningService', { detail: { service: serviceTitle } }));
       } else {
         window.location.href = `mailto:info@obazee-clement-reinigung.de?subject=${encodeURIComponent(
           `Reinigungsanfrage - ${serviceTitle}`

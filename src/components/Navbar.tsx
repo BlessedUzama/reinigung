@@ -36,15 +36,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
 
   const navLinks = [
     { label: 'Leistungen', href: '#services' },
-    { label: 'Preise', href: '#preise' },
     { label: 'Über uns', href: '#about' },
+    { label: 'Kontakt & Angebot', href: '#angebot' },
   ];
 
   const handleCta = () => {
     if (onCtaClick) {
       onCtaClick();
     } else {
-      const target = document.getElementById('booking') || document.getElementById('contact');
+      const target = document.getElementById('angebot') || document.getElementById('contact');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
       }
