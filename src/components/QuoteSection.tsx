@@ -39,6 +39,7 @@ export const QuoteSection: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -52,6 +53,7 @@ export const QuoteSection: React.FC = () => {
         );
         if (found) {
           setService(found);
+          setErrors((prev) => ({ ...prev, service: '' }));
         }
       }
     };
@@ -64,6 +66,7 @@ export const QuoteSection: React.FC = () => {
     // Strictly allow only digits, spaces, hyphens, and leading +
     const sanitized = e.target.value.replace(/[^\d\s\-+]/g, '');
     setPhone(sanitized);
+    if (errors.phone) setErrors((prev) => ({ ...prev, phone: '' }));
   };
 
   const handleAreaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,8 +75,38 @@ export const QuoteSection: React.FC = () => {
     setArea(sanitized);
   };
 
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!name.trim() || name.trim().length < 2) {
+      newErrors.name = 'Bitte geben Sie Ihren vollständigen Namen ein';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.trim() || !emailRegex.test(email.trim())) {
+      newErrors.email = 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+    }
+
+    const digitsOnly = phone.replace(/\D/g, '');
+    if (!phone.trim() || digitsOnly.length < 6) {
+      newErrors.phone = 'Bitte geben Sie eine gültige Telefonnummer ein';
+    }
+
+    if (!service) {
+      newErrors.service = 'Bitte wählen Sie eine Leistung aus';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
@@ -85,7 +118,7 @@ export const QuoteSection: React.FC = () => {
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          _subject: `Neue Reinigungsanfrage von ${name || 'Interessent'}`,
+          _subject: `Neue Reinigungsanfrage von ${name}`,
           _template: 'table',
           _captcha: 'false',
           Leistung: service,
@@ -125,6 +158,7 @@ export const QuoteSection: React.FC = () => {
     setArea('');
     setStartDate('');
     setNotes('');
+    setErrors({});
     setErrorMessage('');
   };
 
@@ -219,7 +253,7 @@ export const QuoteSection: React.FC = () => {
             </div>
           ) : (
             /* FORM STATE */
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} noValidate className="space-y-5">
               
               {/* ERROR ALERT */}
               {status === 'error' && (
@@ -248,8 +282,15 @@ export const QuoteSection: React.FC = () => {
                     <select
                       value={service}
                       disabled={status === 'loading'}
-                      onChange={(e) => setService(e.target.value)}
-                      className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10 disabled:opacity-60"
+                      onChange={(e) => {
+                        setService(e.target.value);
+                        if (errors.service) setErrors((prev) => ({ ...prev, service: '' }));
+                      }}
+                      className={`w-full px-3.5 py-3 rounded-xl border text-xs sm:text-sm outline-none transition-all appearance-none cursor-pointer pr-10 disabled:opacity-60 ${
+                        errors.service
+                          ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 bg-rose-50/20 text-slate-900'
+                          : 'border-slate-200 bg-slate-50/50 text-slate-900 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20'
+                      }`}
                     >
                       {serviceOptions.map((opt) => (
                         <option key={opt} value={opt}>
@@ -259,6 +300,11 @@ export const QuoteSection: React.FC = () => {
                     </select>
                     <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
                   </div>
+                  {errors.service && (
+                    <p className="mt-1.5 text-xs text-rose-500 font-medium flex items-center gap-1">
+                      {errors.service}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -338,13 +384,21 @@ export const QuoteSection: React.FC = () => {
                   </label>
                   <input
                     type="tel"
-                    required
                     placeholder="+49 152 12345678"
                     value={phone}
                     disabled={status === 'loading'}
                     onChange={handlePhoneChange}
-                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                    className={`w-full px-3.5 py-3 rounded-xl border text-xs sm:text-sm outline-none transition-all disabled:opacity-60 ${
+                      errors.phone
+                        ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 bg-rose-50/20 text-slate-900 placeholder:text-rose-300'
+                        : 'border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20'
+                    }`}
                   />
+                  {errors.phone && (
+                    <p className="mt-1.5 text-xs text-rose-500 font-medium flex items-center gap-1">
+                      {errors.phone}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -356,13 +410,24 @@ export const QuoteSection: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    required
                     placeholder="Vor- und Nachname"
                     value={name}
                     disabled={status === 'loading'}
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (errors.name) setErrors((prev) => ({ ...prev, name: '' }));
+                    }}
+                    className={`w-full px-3.5 py-3 rounded-xl border text-xs sm:text-sm outline-none transition-all disabled:opacity-60 ${
+                      errors.name
+                        ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 bg-rose-50/20 text-slate-900 placeholder:text-rose-300'
+                        : 'border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20'
+                    }`}
                   />
+                  {errors.name && (
+                    <p className="mt-1.5 text-xs text-rose-500 font-medium flex items-center gap-1">
+                      {errors.name}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -371,13 +436,24 @@ export const QuoteSection: React.FC = () => {
                   </label>
                   <input
                     type="email"
-                    required
                     placeholder="ihre-email@beispiel.de"
                     value={email}
                     disabled={status === 'loading'}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (errors.email) setErrors((prev) => ({ ...prev, email: '' }));
+                    }}
+                    className={`w-full px-3.5 py-3 rounded-xl border text-xs sm:text-sm outline-none transition-all disabled:opacity-60 ${
+                      errors.email
+                        ? 'border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 bg-rose-50/20 text-slate-900 placeholder:text-rose-300'
+                        : 'border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20'
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="mt-1.5 text-xs text-rose-500 font-medium flex items-center gap-1">
+                      {errors.email}
+                    </p>
+                  )}
                 </div>
               </div>
 
