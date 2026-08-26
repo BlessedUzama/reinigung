@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {
-  FileText,
   Clock,
   ShieldCheck,
   CheckCircle2,
   Phone,
-  Send,
   Building2,
   Sparkles,
   Maximize,
   Zap,
   Hammer,
-  MapPin
+  MapPin,
+  Mail
 } from 'lucide-react';
 
 interface ServiceOption {
@@ -38,16 +37,15 @@ const frequencyOptions = [
 
 const areaQuickOptions = [
   'bis 60 m²',
-  '60 - 120 m²',
-  '120 - 250 m²',
-  '250 - 500 m²',
-  'über 500 m²'
+  '60 – 120 m²',
+  '120 – 250 m²',
+  '> 250 m²'
 ];
 
 export const QuoteSection: React.FC = () => {
   const [selectedService, setSelectedService] = useState<string>('Unterhalts- & Privatreinigung');
   const [selectedFrequency, setSelectedFrequency] = useState<string>('Wöchentlich');
-  const [selectedArea, setSelectedArea] = useState<string>('60 - 120 m²');
+  const [selectedArea, setSelectedArea] = useState<string>('60 – 120 m²');
   const [customArea, setCustomArea] = useState<string>('');
   
   const [name, setName] = useState<string>('');
@@ -112,311 +110,273 @@ export const QuoteSection: React.FC = () => {
   };
 
   return (
-    <section id="angebot" className="bg-white py-20 sm:py-28 relative overflow-hidden border-t border-slate-100">
+    <section id="angebot" className="bg-slate-50/60 py-20 sm:py-28 relative overflow-hidden border-t border-slate-200/80">
       {/* Decorative ambient gradients */}
-      <div className="absolute top-10 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Centered Section Header */}
+        <div className="text-center mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-4 font-heading">
+            <Sparkles className="w-4 h-4 text-primary flex-shrink-0" />
+            <span>Unverbindlich & Kostenlos</span>
+          </div>
+
+          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-[1.15]">
+            Kostenloses Festpreisangebot <span className="text-primary block sm:inline">anfordern</span>
+          </h2>
+
+          <p className="font-sans text-base sm:text-lg text-slate-600 leading-relaxed mt-4 max-w-2xl mx-auto">
+            Wählen Sie Ihre gewünschten Reinigungsleistungen aus – wir erstellen Ihr maßgeschneidertes Angebot innerhalb von 24 Stunden.
+          </p>
+        </div>
+
+        {/* Unified Elevated Form Card */}
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card-hover relative">
           
-          {/* Left Column: Context, Value Proposition & Trust Signals */}
-          <div className="lg:col-span-5 flex flex-col items-start text-left">
+          {isSubmitted && (
+            <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-start gap-3">
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
+              <div className="text-sm">
+                <p className="font-bold">E-Mail Entwurf wurde erstellt!</p>
+                <p className="text-xs mt-0.5 text-emerald-700">
+                  Ihr E-Mail-Programm hat sich mit allen vorausgefüllten Angaben geöffnet. Falls Sie kein Standard-Mailprogramm nutzen, schreiben Sie uns gerne direkt an{' '}
+                  <a href="mailto:info@obazee-clement-reinigung.de" className="underline font-semibold">
+                    info@obazee-clement-reinigung.de
+                  </a>.
+                </p>
+              </div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-7">
             
-            {/* Tag / Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-4 font-heading">
-              <FileText className="w-4 h-4 text-primary flex-shrink-0" />
-              <span>Transparenz & Festpreisgarantie</span>
+            {/* Schritt 1: Reinigungsart wählen */}
+            <div>
+              <label className="block font-heading font-bold text-sm text-slate-900 mb-3">
+                Schritt 1: Reinigungsart wählen
+              </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {serviceOptions.map((opt) => {
+                  const Icon = opt.icon;
+                  const isSelected = selectedService === opt.id;
+                  return (
+                    <button
+                      key={opt.id}
+                      type="button"
+                      onClick={() => setSelectedService(opt.id)}
+                      className={`flex items-center gap-3 p-3.5 rounded-xl border text-left font-sans text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                        isSelected
+                          ? 'bg-primary text-white border-primary shadow-sm ring-2 ring-primary/20'
+                          : 'bg-slate-50/70 text-slate-700 border-slate-200 hover:border-primary/40 hover:bg-slate-100/70'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-accent' : 'text-primary'}`} />
+                      <span className="truncate">{opt.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Headline */}
-            <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-[42px] text-slate-900 tracking-tight leading-[1.15]">
-              Kostenloses & unverbindliches{' '}
-              <span className="text-primary block mt-1">Festpreisangebot erhalten</span>
-            </h2>
+            {/* Schritt 2: Häufigkeit */}
+            <div>
+              <label className="block font-heading font-bold text-sm text-slate-900 mb-3">
+                Schritt 2: Häufigkeit
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {frequencyOptions.map((freq) => {
+                  const isSelected = selectedFrequency === freq;
+                  return (
+                    <button
+                      key={freq}
+                      type="button"
+                      onClick={() => setSelectedFrequency(freq)}
+                      className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer border ${
+                        isSelected
+                          ? 'bg-accent text-slate-950 border-accent font-bold shadow-sm'
+                          : 'bg-slate-50/70 text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/70'
+                      }`}
+                    >
+                      {freq}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-            {/* Explanatory paragraph */}
-            <p className="font-sans text-base text-slate-600 leading-relaxed mt-5">
-              Jede Immobilie ist einzigartig. Bei uns erhalten Sie keine Pauschalen von der Stange, sondern ein präzise kalkuliertes Angebot, das exakt auf Ihre Quadratmeter, Ihre gewünschten Intervalle und Ihren Hygieneanspruch abgestimmt ist – ohne versteckte Zusatzkosten.
-            </p>
-
-            {/* 4 Trust Feature Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 w-full">
+            {/* Schritt 3: Ungefähre Fläche in m² */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <label className="font-heading font-bold text-sm text-slate-900">
+                  Schritt 3: Ungefähre Fläche in m²
+                </label>
+                <span className="text-xs text-slate-500 font-medium">Schätzwert genügt</span>
+              </div>
               
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-3.5">
-                <div className="p-2.5 rounded-xl bg-primary/10 text-primary flex-shrink-0 mt-0.5">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-sm text-slate-900">24h Express-Antwort</h4>
-                  <p className="font-sans text-xs text-slate-600 mt-1 leading-snug">
-                    Detailliertes Angebot garantiert innerhalb eines Werktags.
-                  </p>
-                </div>
+              <div className="flex flex-wrap gap-2 mb-3">
+                {areaQuickOptions.map((area) => {
+                  const isSelected = selectedArea === area && !customArea;
+                  return (
+                    <button
+                      key={area}
+                      type="button"
+                      onClick={() => {
+                        setSelectedArea(area);
+                        setCustomArea('');
+                      }}
+                      className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer border ${
+                        isSelected
+                          ? 'bg-slate-900 text-white border-slate-900 shadow-sm'
+                          : 'bg-slate-50/70 text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-100/70'
+                      }`}
+                    >
+                      {area}
+                    </button>
+                  );
+                })}
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-3.5">
-                <div className="p-2.5 rounded-xl bg-accent-cyan/15 text-[#00a3e0] flex-shrink-0 mt-0.5">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-sm text-slate-900">Kostenlose Besichtigung</h4>
-                  <p className="font-sans text-xs text-slate-600 mt-1 leading-snug">
-                    Auf Wunsch unverbindliche Vor-Ort-Begehung in Frankfurt.
-                  </p>
-                </div>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Oder genaue Quadratmeterzahl eingeben (z.B. 145)"
+                  value={customArea}
+                  onChange={(e) => setCustomArea(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+                <span className="absolute right-4 top-3 text-xs text-slate-400 font-medium">m²</span>
               </div>
-
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-3.5">
-                <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 flex-shrink-0 mt-0.5">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-sm text-slate-900">100% Versichert</h4>
-                  <p className="font-sans text-xs text-slate-600 mt-1 leading-snug">
-                    Betriebshaftpflicht für maximale Sicherheit Ihres Objekts.
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/70 flex items-start gap-3.5">
-                <div className="p-2.5 rounded-xl bg-primary/10 text-primary flex-shrink-0 mt-0.5">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-heading font-bold text-sm text-slate-900">Keine versteckten Kosten</h4>
-                  <p className="font-sans text-xs text-slate-600 mt-1 leading-snug">
-                    Verbindlicher Endpreis inklusive Reinigungsmittel & Anfahrt.
-                  </p>
-                </div>
-              </div>
-
             </div>
 
-            {/* Direct Contact Pill */}
-            <div className="mt-8 p-5 rounded-2xl bg-gradient-to-r from-primary/5 via-highlight/10 to-transparent border border-primary/15 w-full flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            {/* Schritt 4: Kontaktdaten */}
+            <div className="pt-3 border-t border-slate-100">
+              <label className="block font-heading font-bold text-sm text-slate-900 mb-3">
+                Schritt 4: Kontaktdaten
+              </label>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                <input
+                  type="text"
+                  required
+                  placeholder="Vor- und Nachname *"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+                <input
+                  type="tel"
+                  required
+                  placeholder="Telefonnummer *"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                <input
+                  type="email"
+                  required
+                  placeholder="E-Mail-Adresse *"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+                <input
+                  type="text"
+                  placeholder="PLZ / Ort (z.B. 60311 Frankfurt)"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+              </div>
+
               <div>
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider font-heading">
-                  Direkter Draht zu Herrn Obazee
-                </p>
-                <p className="text-base font-bold text-slate-900 mt-0.5">
-                  Lieber telefonisch abstimmen?
-                </p>
+                <textarea
+                  rows={2}
+                  placeholder="Zusätzliche Notizen oder Wunschtermin (optional)"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                />
               </div>
-              <a
-                href="tel:+4915210236967"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-white hover:bg-primary-dark font-heading font-bold text-xs shadow-sm transition-all duration-200 active:scale-95 whitespace-nowrap"
+            </div>
+
+            {/* Submit Action Button */}
+            <div>
+              <button
+                type="submit"
+                className="w-full py-4 px-6 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer"
               >
-                <Phone className="w-3.5 h-3.5" />
-                <span>+49 1521 0236967</span>
-              </a>
+                <Mail className="w-4 h-4 text-slate-950" />
+                <span>Angebot per E-Mail anfragen</span>
+              </button>
+
+              <div className="flex items-center justify-center gap-2 mt-3 text-[11px] sm:text-xs text-slate-500 font-medium">
+                <ShieldCheck className="w-3.5 h-3.5 text-primary" />
+                <span>100% kostenlos & unverbindlich • Kein Spam • Schnelle Antwort</span>
+              </div>
             </div>
 
-          </div>
-
-          {/* Right Column: Interactive Quote Request Form */}
-          <div className="lg:col-span-7 w-full">
-            <div className="bg-slate-50/90 rounded-3xl p-6 sm:p-8 lg:p-9 border border-slate-200/90 shadow-card relative">
-              
-              {isSubmitted && (
-                <div className="mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <div className="text-sm">
-                    <p className="font-bold">E-Mail Entwurf wurde erstellt!</p>
-                    <p className="text-xs mt-0.5 text-emerald-700">
-                      Ihr E-Mail-Programm hat sich mit allen vorausgefüllten Angaben geöffnet. Falls Sie kein Standard-Mailprogramm nutzen, schreiben Sie uns gerne direkt an{' '}
-                      <a href="mailto:info@obazee-clement-reinigung.de" className="underline font-semibold">
-                        info@obazee-clement-reinigung.de
-                      </a>.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                
-                {/* Step 1: Select Service */}
-                <div>
-                  <label className="block font-heading font-bold text-sm text-slate-900 mb-2.5">
-                    1. Gewünschte Reinigungsart auswählen:
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {serviceOptions.map((opt) => {
-                      const Icon = opt.icon;
-                      const isSelected = selectedService === opt.id;
-                      return (
-                        <button
-                          key={opt.id}
-                          type="button"
-                          onClick={() => setSelectedService(opt.id)}
-                          className={`flex items-center gap-3 p-3 rounded-xl border text-left font-sans text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                            isSelected
-                              ? 'bg-primary text-white border-primary shadow-sm ring-2 ring-primary/20'
-                              : 'bg-white text-slate-700 border-slate-200 hover:border-primary/40 hover:bg-slate-50'
-                          }`}
-                        >
-                          <Icon className={`w-4 h-4 flex-shrink-0 ${isSelected ? 'text-accent' : 'text-primary'}`} />
-                          <span className="truncate">{opt.label}</span>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Step 2: Cleaning Frequency */}
-                <div>
-                  <label className="block font-heading font-bold text-sm text-slate-900 mb-2.5">
-                    2. Wie oft soll gereinigt werden?
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {frequencyOptions.map((freq) => {
-                      const isSelected = selectedFrequency === freq;
-                      return (
-                        <button
-                          key={freq}
-                          type="button"
-                          onClick={() => setSelectedFrequency(freq)}
-                          className={`px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer border ${
-                            isSelected
-                              ? 'bg-accent text-slate-950 border-accent font-bold shadow-sm'
-                              : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          {freq}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Step 3: Area Size Selection */}
-                <div>
-                  <div className="flex items-center justify-between mb-2.5">
-                    <label className="font-heading font-bold text-sm text-slate-900">
-                      3. Ungefähre Raum- / Gebäudefläche:
-                    </label>
-                    <span className="text-xs text-slate-500 font-medium">Schätzwert genügt</span>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {areaQuickOptions.map((area) => {
-                      const isSelected = selectedArea === area && !customArea;
-                      return (
-                        <button
-                          key={area}
-                          type="button"
-                          onClick={() => {
-                            setSelectedArea(area);
-                            setCustomArea('');
-                          }}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer border ${
-                            isSelected
-                              ? 'bg-slate-900 text-white border-slate-900'
-                              : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          {area}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <div className="relative">
-                    <input
-                      type="text"
-                      placeholder="Oder genaue Quadratmeterzahl (z.B. 145)"
-                      value={customArea}
-                      onChange={(e) => setCustomArea(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    />
-                    <span className="absolute right-3.5 top-2.5 text-xs text-slate-400 font-medium">m²</span>
-                  </div>
-                </div>
-
-                {/* Step 4: Contact Information */}
-                <div className="pt-2 border-t border-slate-200/70">
-                  <label className="block font-heading font-bold text-sm text-slate-900 mb-3">
-                    4. Ihre Kontaktdaten für das Angebot:
-                  </label>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                    <div>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Vor- und Nachname *"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="Telefonnummer (für Rückfragen) *"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
-                    <div>
-                      <input
-                        type="email"
-                        required
-                        placeholder="E-Mail-Adresse *"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                      />
-                    </div>
-                    <div>
-                      <input
-                        type="text"
-                        placeholder="PLZ / Ort (z.B. 60311 Frankfurt)"
-                        value={location}
-                        onChange={(e) => setLocation(e.target.value)}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <textarea
-                      rows={2}
-                      placeholder="Besondere Wünsche oder Anmerkungen (optional)"
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-                    />
-                  </div>
-                </div>
-
-                {/* Submit Action Button */}
-                <div>
-                  <button
-                    type="submit"
-                    className="w-full py-4 px-6 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer"
-                  >
-                    <Send className="w-4 h-4 text-slate-950" />
-                    <span>Unverbindliches Festpreisangebot anfordern</span>
-                  </button>
-
-                  <div className="flex items-center justify-center gap-2 mt-3 text-[11px] sm:text-xs text-slate-500 font-medium">
-                    <ShieldCheck className="w-3.5 h-3.5 text-primary" />
-                    <span>100% kostenlos & unverbindlich • Kein Werbespam • Sichere Daten</span>
-                  </div>
-                </div>
-
-              </form>
-
-            </div>
-          </div>
+          </form>
 
         </div>
+
+        {/* Horizontal Trust Bar (Below Form) */}
+        <div className="mt-10 sm:mt-12 pt-8 sm:pt-10 border-t border-slate-200/80">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
+            
+            <div className="flex flex-col items-center p-3 rounded-2xl bg-white/70 border border-slate-200/60 shadow-subtle">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2">
+                <Clock className="w-5 h-5" />
+              </div>
+              <span className="font-heading font-bold text-xs sm:text-sm text-slate-900">24h Express-Antwort</span>
+              <span className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Schnell & verbindlich</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 rounded-2xl bg-white/70 border border-slate-200/60 shadow-subtle">
+              <div className="w-10 h-10 rounded-xl bg-accent-cyan/15 text-[#00a3e0] flex items-center justify-center mb-2">
+                <MapPin className="w-5 h-5" />
+              </div>
+              <span className="font-heading font-bold text-xs sm:text-sm text-slate-900">Kostenlose Besichtigung</span>
+              <span className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Vor Ort in Frankfurt</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 rounded-2xl bg-white/70 border border-slate-200/60 shadow-subtle">
+              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center mb-2">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <span className="font-heading font-bold text-xs sm:text-sm text-slate-900">100% Versichert</span>
+              <span className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Geprüfte Qualität</span>
+            </div>
+
+            <div className="flex flex-col items-center p-3 rounded-2xl bg-white/70 border border-slate-200/60 shadow-subtle">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-2">
+                <CheckCircle2 className="w-5 h-5" />
+              </div>
+              <span className="font-heading font-bold text-xs sm:text-sm text-slate-900">Feste Endpreise</span>
+              <span className="text-[11px] sm:text-xs text-slate-500 mt-0.5">Ohne versteckte Kosten</span>
+            </div>
+
+          </div>
+
+          {/* Direct telephone touchpoint */}
+          <div className="mt-6 text-center">
+            <p className="text-xs text-slate-500 font-sans">
+              Sie möchten lieber direkt sprechen?{' '}
+              <a
+                href="tel:+4915210236967"
+                className="font-semibold text-primary hover:text-primary-dark underline inline-flex items-center gap-1"
+              >
+                <Phone className="w-3 h-3" />
+                <span>+49 1521 0236967</span>
+              </a>
+            </p>
+          </div>
+        </div>
+
       </div>
     </section>
   );
