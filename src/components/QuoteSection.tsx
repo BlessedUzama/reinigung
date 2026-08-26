@@ -280,26 +280,26 @@ export const QuoteSection: React.FC = () => {
               />
             </div>
 
-            {/* Bottom Action & Inline Trust Integration */}
-            <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Centered Bottom Action & Trust Indicators */}
+            <div className="pt-6 border-t border-slate-100 flex flex-col items-center justify-center text-center space-y-4">
               <button
                 type="submit"
-                className="w-full sm:w-auto flex-1 py-4 px-8 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer"
+                className="w-full sm:w-auto min-w-[280px] sm:min-w-[340px] px-8 py-3.5 sm:py-4 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer"
               >
-                <Mail className="w-4 h-4 text-slate-950" />
-                <span>Kostenloses Angebot per E-Mail anfordern</span>
+                <Mail className="w-4 h-4 text-slate-950 flex-shrink-0" />
+                <span>Kostenloses Angebot anfordern</span>
               </button>
 
-              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1.5 text-xs text-slate-500 font-medium">
-                <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-500 font-medium">
+                <div className="flex items-center gap-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                  <span>100% unverbindlich</span>
+                  <span>100% kostenlos & unverbindlich</span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                  <span>Antwort in 24h</span>
+                  <span>Antwort innerhalb 24h</span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                   <span>Feste Endpreise</span>
                 </div>
