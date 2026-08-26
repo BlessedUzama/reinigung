@@ -5,16 +5,13 @@ import {
   ShieldCheck,
   CheckCircle2,
   Phone,
-  Mail,
-  ArrowRight,
   Send,
   Building2,
   Sparkles,
   Maximize,
   Zap,
   Hammer,
-  MapPin,
-  HelpCircle
+  MapPin
 } from 'lucide-react';
 
 interface ServiceOption {
