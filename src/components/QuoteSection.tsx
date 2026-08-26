@@ -5,7 +5,11 @@ import {
   CheckCircle2,
   Clock,
   Mail,
-  ChevronDown
+  ChevronDown,
+  Loader2,
+  AlertCircle,
+  Phone,
+  RefreshCw
 } from 'lucide-react';
 
 const serviceOptions = [
@@ -34,7 +38,9 @@ export const QuoteSection: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
   // Listen to external service selection events (e.g. from Services section buttons)
   useEffect(() => {
@@ -54,40 +60,72 @@ export const QuoteSection: React.FC = () => {
     return () => window.removeEventListener('selectCleaningService', handleServiceSelect);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Strictly allow only digits, spaces, hyphens, and leading +
+    const sanitized = e.target.value.replace(/[^\d\s\-+]/g, '');
+    setPhone(sanitized);
+  };
+
+  const handleAreaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Strictly allow only numeric digits
+    const sanitized = e.target.value.replace(/[^\d]/g, '');
+    setArea(sanitized);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
 
-    const subject = encodeURIComponent(`Angebotsanfrage: ${service} (${name || 'Kunde'})`);
-    
-    const bodyLines = [
-      `Guten Tag Herr Obazee,`,
-      ``,
-      `ich interessiere mich für ein unverbindliches Festpreisangebot mit folgenden Parametern:`,
-      ``,
-      `• Gewünschte Leistung: ${service}`,
-      `• Reinigungsrhythmus: ${frequency}`,
-      `• Ungefähre Fläche: ${area ? `${area} m²` : 'Nicht angegeben'}`,
-      `• Wunschtermin / Start: ${startDate || 'Ab sofort / Flexibel'}`,
-      ``,
-      `--- KONTAKTDATEN ---`,
-      `• Name: ${name || 'Nicht angegeben'}`,
-      `• Telefon: ${phone || 'Nicht angegeben'}`,
-      `• E-Mail: ${email || 'Nicht angegeben'}`,
-      `• Einsatzort / PLZ: ${location || 'Nicht angegeben'}`,
-      ``,
-      notes ? `• Zusätzliche Wünsche / Notizen:\n${notes}\n` : '',
-      `Ich freue mich über Ihre zeitnahe Rückmeldung.`,
-      ``,
-      `Freundliche Grüße,`,
-      name || 'Interessent'
-    ];
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/uzamablessed@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `Neue Reinigungsanfrage von ${name || 'Interessent'}`,
+          _template: 'table',
+          _captcha: 'false',
+          Leistung: service,
+          Haeufigkeit: frequency,
+          Flaeche_m2: area ? `${area} m²` : 'Nicht angegeben',
+          Wunschtermin: startDate || 'Ab sofort / Flexibel',
+          Name: name,
+          Email: email,
+          Telefonnummer: phone,
+          PLZ_Ort: location || 'Nicht angegeben',
+          Notizen: notes || 'Keine zusätzlichen Notizen',
+        }),
+      });
 
-    const mailtoUrl = `mailto:info@obazee-clement-reinigung.de?subject=${subject}&body=${encodeURIComponent(
-      bodyLines.filter(Boolean).join('\n')
-    )}`;
+      const data = await response.json();
 
-    window.location.href = mailtoUrl;
-    setIsSubmitted(true);
+      if (response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
+        setStatus('success');
+      } else {
+        throw new Error(data.message || 'Die Anfrage konnte nicht übermittelt werden. Bitte versuchen Sie es erneut.');
+      }
+    } catch (err: unknown) {
+      console.error('Form submission error:', err);
+      setStatus('error');
+      setErrorMessage(
+        err instanceof Error ? err.message : 'Es gab ein Problem beim Absenden. Bitte überprüfen Sie Ihre Internetverbindung oder rufen Sie uns direkt an.'
+      );
+    }
+  };
+
+  const handleReset = () => {
+    setStatus('idle');
+    setName('');
+    setEmail('');
+    setPhone('');
+    setLocation('');
+    setArea('');
+    setStartDate('');
+    setNotes('');
+    setErrorMessage('');
   };
 
   return (
@@ -114,199 +152,288 @@ export const QuoteSection: React.FC = () => {
         </div>
 
         {/* Widened Form Card */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200 shadow-xl relative">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200 shadow-xl relative transition-all duration-300">
           
-          {isSubmitted && (
-            <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-start gap-3">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-              <div className="text-xs sm:text-sm">
-                <p className="font-bold">E-Mail Entwurf wurde erfolgreich erstellt!</p>
-                <p className="mt-0.5 text-emerald-700">
-                  Ihr Standard-Mailprogramm hat sich geöffnet. Sie können uns auch direkt schreiben an:{' '}
-                  <a href="mailto:info@obazee-clement-reinigung.de" className="underline font-semibold">
-                    info@obazee-clement-reinigung.de
-                  </a>.
-                </p>
+          {/* SUCCESS STATE */}
+          {status === 'success' ? (
+            <div className="py-8 sm:py-12 flex flex-col items-center text-center max-w-xl mx-auto">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mb-6 shadow-sm ring-8 ring-emerald-50">
+                <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12" />
+              </div>
+
+              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 font-heading uppercase tracking-wider mb-3">
+                Erfolgreich übermittelt
+              </span>
+
+              <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight">
+                Vielen Dank für Ihre Anfrage{name ? `, ${name}` : ''}!
+              </h3>
+
+              <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed mt-3">
+                Ihre Angaben wurden direkt an uns übermittelt. Wir prüfen Ihre Wünsche sorgfältig und melden uns innerhalb von <strong className="text-slate-900 font-semibold">24 Stunden</strong> mit Ihrem maßgeschneiderten Festpreisangebot.
+              </p>
+
+              {/* Summary Pill Box */}
+              <div className="w-full mt-6 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/80 text-left font-sans text-xs sm:text-sm text-slate-700 space-y-2">
+                <div className="flex justify-between border-b border-slate-200/60 pb-1.5">
+                  <span className="text-slate-500 font-medium">Leistung:</span>
+                  <span className="font-bold text-slate-900">{service}</span>
+                </div>
+                <div className="flex justify-between border-b border-slate-200/60 pb-1.5">
+                  <span className="text-slate-500 font-medium">Rhythmus:</span>
+                  <span className="font-semibold text-slate-900">{frequency}</span>
+                </div>
+                {area && (
+                  <div className="flex justify-between border-b border-slate-200/60 pb-1.5">
+                    <span className="text-slate-500 font-medium">Fläche:</span>
+                    <span className="font-semibold text-slate-900">{area} m²</span>
+                  </div>
+                )}
+                {location && (
+                  <div className="flex justify-between">
+                    <span className="text-slate-500 font-medium">Ort:</span>
+                    <span className="font-semibold text-slate-900">{location}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Actions */}
+              <div className="mt-8 flex flex-col sm:flex-row items-center gap-3.5 w-full sm:w-auto">
+                <a
+                  href="tel:+4915210236967"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-white font-heading font-bold text-xs sm:text-sm shadow-sm hover:bg-primary-dark transition-all duration-200 active:scale-95 whitespace-nowrap"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Dringende Frage? +49 1521 0236967</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-heading font-semibold text-xs sm:text-sm transition-all duration-200 active:scale-95 cursor-pointer whitespace-nowrap"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  <span>Neue Anfrage stellen</span>
+                </button>
               </div>
             </div>
-          )}
+          ) : (
+            /* FORM STATE */
+            <form onSubmit={handleSubmit} className="space-y-5">
+              
+              {/* ERROR ALERT */}
+              {status === 'error' && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 flex items-start gap-3 animate-in fade-in">
+                  <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  <div className="text-xs sm:text-sm">
+                    <p className="font-bold">Übertragungsfehler</p>
+                    <p className="mt-0.5 text-red-700">{errorMessage}</p>
+                    <p className="mt-1 text-xs text-red-600 font-medium">
+                      Alternativ erreichen Sie uns direkt telefonisch unter{' '}
+                      <a href="tel:+4915210236967" className="underline font-bold text-red-800">
+                        +49 1521 0236967
+                      </a>.
+                    </p>
+                  </div>
+                </div>
+              )}
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            
-            {/* Row 1: 3 Columns on Desktop (Leistung, Häufigkeit, Fläche) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  Gewünschte Leistung *
-                </label>
-                <div className="relative">
-                  <select
-                    value={service}
-                    onChange={(e) => setService(e.target.value)}
-                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10"
-                  >
-                    {serviceOptions.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
+              {/* Row 1: 3 Columns on Desktop (Leistung, Häufigkeit, Fläche) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    Gewünschte Leistung *
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={service}
+                      disabled={status === 'loading'}
+                      onChange={(e) => setService(e.target.value)}
+                      className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10 disabled:opacity-60"
+                    >
+                      {serviceOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    Häufigkeit *
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={frequency}
+                      disabled={status === 'loading'}
+                      onChange={(e) => setFrequency(e.target.value)}
+                      className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10 disabled:opacity-60"
+                    >
+                      {frequencyOptions.map((freq) => (
+                        <option key={freq} value={freq}>
+                          {freq}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    Fläche ca. (m²)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="z.B. 120"
+                      value={area}
+                      disabled={status === 'loading'}
+                      onChange={handleAreaChange}
+                      className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                    />
+                    <span className="absolute right-3.5 top-3 text-xs text-slate-400 font-medium">m²</span>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  Häufigkeit *
-                </label>
-                <div className="relative">
-                  <select
-                    value={frequency}
-                    onChange={(e) => setFrequency(e.target.value)}
-                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10"
-                  >
-                    {frequencyOptions.map((freq) => (
-                      <option key={freq} value={freq}>
-                        {freq}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
-                </div>
-              </div>
-
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  Fläche ca. (m²)
-                </label>
-                <div className="relative">
+              {/* Row 2: 3 Columns on Desktop (Wunschtermin, PLZ/Ort, Telefon) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    Wunschtermin / Start
+                  </label>
                   <input
                     type="text"
-                    placeholder="z.B. 120"
-                    value={area}
-                    onChange={(e) => setArea(e.target.value)}
-                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                    placeholder="z.B. Ab sofort oder Wunschdatum"
+                    value={startDate}
+                    disabled={status === 'loading'}
+                    onChange={(e) => setStartDate(e.target.value)}
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
                   />
-                  <span className="absolute right-3.5 top-3 text-xs text-slate-400 font-medium">m²</span>
+                </div>
+
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    PLZ / Ort
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="z.B. 60311 Frankfurt"
+                    value={location}
+                    disabled={status === 'loading'}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    Telefonnummer *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="+49 152 12345678"
+                    value={phone}
+                    disabled={status === 'loading'}
+                    onChange={handlePhoneChange}
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                  />
                 </div>
               </div>
-            </div>
 
-            {/* Row 2: 3 Columns on Desktop (Wunschtermin, PLZ/Ort, Telefon) */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  Wunschtermin / Start
-                </label>
-                <input
-                  type="text"
-                  placeholder="z.B. Ab sofort oder Wunschdatum"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  PLZ / Ort
-                </label>
-                <input
-                  type="text"
-                  placeholder="z.B. 60311 Frankfurt"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  Telefonnummer *
-                </label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="+49 152 12345678"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Row 3: 2 Columns on Desktop (Vollständiger Name, E-Mail) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  Vollständiger Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Vor- und Nachname"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                  E-Mail-Adresse *
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="name@beispiel.de"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Row 4: Full-Width Notes */}
-            <div>
-              <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
-                Besondere Wünsche / Notizen (optional)
-              </label>
-              <textarea
-                rows={2}
-                placeholder="z.B. Schlüsselübergabe, Treppenhausreinigung, besondere Fensterflächen..."
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
-              />
-            </div>
-
-            {/* Centered Bottom Action & Trust Indicators */}
-            <div className="pt-6 border-t border-slate-100 flex flex-col items-center justify-center text-center space-y-4">
-              <button
-                type="submit"
-                className="w-full sm:w-auto min-w-[280px] sm:min-w-[340px] px-8 py-3.5 sm:py-4 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer"
-              >
-                <Mail className="w-4 h-4 text-slate-950 flex-shrink-0" />
-                <span>Kostenloses Angebot anfordern</span>
-              </button>
-
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-500 font-medium">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                  <span>100% kostenlos & unverbindlich</span>
+              {/* Row 3: 2 Columns on Desktop (Vollständiger Name, E-Mail) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    Vollständiger Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Vor- und Nachname"
+                    value={name}
+                    disabled={status === 'loading'}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                  />
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                  <span>Antwort innerhalb 24h</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                  <span>Feste Endpreise</span>
+
+                <div>
+                  <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                    E-Mail-Adresse *
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="ihre-email@beispiel.de"
+                    value={email}
+                    disabled={status === 'loading'}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all disabled:opacity-60"
+                  />
                 </div>
               </div>
-            </div>
 
-          </form>
+              {/* Row 4: Full-Width Notes */}
+              <div>
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                  Besondere Wünsche / Notizen (optional)
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="z.B. Schlüsselübergabe, Treppenhausreinigung, besondere Fensterflächen..."
+                  value={notes}
+                  disabled={status === 'loading'}
+                  onChange={(e) => setNotes(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none disabled:opacity-60"
+                />
+              </div>
+
+              {/* Centered Bottom Action & Trust Indicators */}
+              <div className="pt-6 border-t border-slate-100 flex flex-col items-center justify-center text-center space-y-4">
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="w-full sm:w-auto min-w-[280px] sm:min-w-[340px] px-8 py-3.5 sm:py-4 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                >
+                  {status === 'loading' ? (
+                    <>
+                      <Loader2 className="w-4 h-4 text-slate-950 animate-spin flex-shrink-0" />
+                      <span>Anfrage wird gesendet...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Mail className="w-4 h-4 text-slate-950 flex-shrink-0" />
+                      <span>Kostenloses Angebot anfordern</span>
+                    </>
+                  )}
+                </button>
+
+                <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-xs text-slate-500 font-medium">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                    <span>100% kostenlos & unverbindlich</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span>Antwort innerhalb 24h</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span>Feste Endpreise</span>
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          )}
 
         </div>
 
