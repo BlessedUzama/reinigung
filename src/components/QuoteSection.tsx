@@ -29,10 +29,10 @@ export const QuoteSection: React.FC = () => {
   const [frequency, setFrequency] = useState<string>('Wöchentlich');
   const [area, setArea] = useState<string>('');
   const [startDate, setStartDate] = useState<string>('');
+  const [location, setLocation] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [location, setLocation] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
@@ -91,30 +91,30 @@ export const QuoteSection: React.FC = () => {
   };
 
   return (
-    <section id="angebot" className="bg-slate-50/60 py-12 sm:py-16 relative overflow-hidden border-t border-slate-200/80">
+    <section id="angebot" className="bg-slate-50/60 py-12 sm:py-16 lg:py-20 relative overflow-hidden border-t border-slate-200/80">
       {/* Decorative subtle ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[550px] h-[300px] bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10" />
 
-      <div className="max-w-3xl mx-auto px-4">
+      <div className="max-w-5xl lg:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Section */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-3 font-heading">
+        <div className="text-center mb-8 sm:mb-10">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-3 font-heading">
             <Sparkles className="w-3.5 h-3.5 text-primary flex-shrink-0" />
             <span>Unverbindlich & Kostenlos</span>
           </div>
 
-          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl text-slate-900 tracking-tight leading-snug">
+          <h2 className="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 tracking-tight leading-snug">
             Kostenloses Festpreisangebot anfordern
           </h2>
 
-          <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed mt-2 max-w-xl mx-auto">
+          <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed mt-2 max-w-2xl mx-auto">
             Wählen Sie Ihre gewünschten Reinigungsleistungen aus – wir erstellen Ihr maßgeschneidertes Angebot innerhalb von 24 Stunden.
           </p>
         </div>
 
-        {/* Compact 2-Column Form Card */}
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xl relative">
+        {/* Widened Form Card */}
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-10 lg:p-12 border border-slate-200 shadow-xl relative">
           
           {isSubmitted && (
             <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex items-start gap-3">
@@ -131,19 +131,19 @@ export const QuoteSection: React.FC = () => {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             
-            {/* Row 1: Service & Frequency */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Row 1: 3 Columns on Desktop (Leistung, Häufigkeit, Fläche) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
               <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
                   Gewünschte Leistung *
                 </label>
                 <div className="relative">
                   <select
                     value={service}
                     onChange={(e) => setService(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10"
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10"
                   >
                     {serviceOptions.map((opt) => (
                       <option key={opt} value={opt}>
@@ -151,19 +151,19 @@ export const QuoteSection: React.FC = () => {
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
                 </div>
               </div>
 
               <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
                   Häufigkeit *
                 </label>
                 <div className="relative">
                   <select
                     value={frequency}
                     onChange={(e) => setFrequency(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10"
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none cursor-pointer pr-10"
                   >
                     {frequencyOptions.map((freq) => (
                       <option key={freq} value={freq}>
@@ -171,15 +171,12 @@ export const QuoteSection: React.FC = () => {
                       </option>
                     ))}
                   </select>
-                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3 top-3 pointer-events-none" />
+                  <ChevronDown className="w-4 h-4 text-slate-400 absolute right-3.5 top-3.5 pointer-events-none" />
                 </div>
               </div>
-            </div>
 
-            {/* Row 2: Area & Start Date */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
                   Fläche ca. (m²)
                 </label>
                 <div className="relative">
@@ -188,14 +185,17 @@ export const QuoteSection: React.FC = () => {
                     placeholder="z.B. 120"
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                    className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                   />
-                  <span className="absolute right-3.5 top-2.5 text-xs text-slate-400 font-medium">m²</span>
+                  <span className="absolute right-3.5 top-3 text-xs text-slate-400 font-medium">m²</span>
                 </div>
               </div>
+            </div>
 
+            {/* Row 2: 3 Columns on Desktop (Wunschtermin, PLZ/Ort, Telefon) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
               <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
                   Wunschtermin / Start
                 </label>
                 <input
@@ -203,46 +203,25 @@ export const QuoteSection: React.FC = () => {
                   placeholder="z.B. Ab sofort oder Wunschdatum"
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 />
               </div>
-            </div>
 
-            {/* Row 3: Name & Email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
-                  Vollständiger Name *
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                  PLZ / Ort
                 </label>
                 <input
                   type="text"
-                  required
-                  placeholder="Vor- und Nachname"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  placeholder="z.B. 60311 Frankfurt"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 />
               </div>
 
               <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
-                  E-Mail-Adresse *
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="name@beispiel.de"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Row 4: Phone & Location */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
                   Telefonnummer *
                 </label>
                 <input
@@ -251,59 +230,76 @@ export const QuoteSection: React.FC = () => {
                   placeholder="+49 152 12345678"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
-                  PLZ / Ort
-                </label>
-                <input
-                  type="text"
-                  placeholder="z.B. 60311 Frankfurt"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 />
               </div>
             </div>
 
-            {/* Row 5: Notes */}
+            {/* Row 3: 2 Columns on Desktop (Vollständiger Name, E-Mail) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+              <div>
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                  Vollständiger Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  placeholder="Vor- und Nachname"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+              </div>
+
+              <div>
+                <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
+                  E-Mail-Adresse *
+                </label>
+                <input
+                  type="email"
+                  required
+                  placeholder="name@beispiel.de"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            {/* Row 4: Full-Width Notes */}
             <div>
-              <label className="block font-heading font-bold text-xs text-slate-800 mb-1.5">
+              <label className="block font-heading font-bold text-xs sm:text-sm text-slate-800 mb-1.5">
                 Besondere Wünsche / Notizen (optional)
               </label>
               <textarea
                 rows={2}
-                placeholder="z.B. Schlüsselübergabe, Treppenhausreinigung, Fensterflächen..."
+                placeholder="z.B. Schlüsselübergabe, Treppenhausreinigung, besondere Fensterflächen..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/50 text-slate-900 placeholder:text-slate-400 text-xs sm:text-sm focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
               />
             </div>
 
-            {/* Submit Action Button */}
-            <div className="pt-2">
+            {/* Bottom Action & Inline Trust Integration */}
+            <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
               <button
                 type="submit"
-                className="w-full py-3.5 px-6 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto flex-1 py-4 px-8 rounded-xl font-heading font-extrabold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] flex items-center justify-center gap-2.5 cursor-pointer"
               >
                 <Mail className="w-4 h-4 text-slate-950" />
-                <span>Kostenloses Angebot anfordern</span>
+                <span>Kostenloses Angebot per E-Mail anfordern</span>
               </button>
 
-              {/* Compact Inline Trust Row */}
-              <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-3.5 pt-3 border-t border-slate-100 text-[11px] sm:text-xs text-slate-500 font-medium">
-                <div className="flex items-center gap-1.5">
+              <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 gap-y-1.5 text-xs text-slate-500 font-medium">
+                <div className="flex items-center gap-1">
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
-                  <span>Kostenlos & unverbindlich</span>
+                  <span>100% unverbindlich</span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                   <span>Antwort in 24h</span>
                 </div>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0" />
                   <span>Feste Endpreise</span>
                 </div>
