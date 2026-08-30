@@ -64,7 +64,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
           {/* Left Side: Brand Logo with origin-left optical scale */}
           <a
             href="/"
-            className="flex-shrink-0 flex items-center select-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-lg h-11 sm:h-13 w-[150px] sm:w-[185px] md:w-[215px]"
+            className="flex-shrink-0 flex items-center select-none focus-visible:ring-2 focus-visible:ring-primary/40 rounded-lg h-11 sm:h-13 w-[150px] sm:w-[185px] md:w-[215px] ml-0 pl-0"
             aria-label="Obazee Clement Reinigung Startseite"
           >
             <div className={`transition-transform duration-300 flex items-center w-full h-full ${isScrolled ? 'scale-95' : 'scale-100'}`}>

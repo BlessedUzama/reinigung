@@ -32,25 +32,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Copy & Conversion */}
-          <div className="flex flex-col items-start text-left justify-center">
+          <div className="flex flex-col items-start text-left justify-center pl-0 ml-0">
 
-            {/* Main Headline (Clean 2-Line Rhythm) */}
-            <h1 className="font-heading font-black text-3xl sm:text-4xl lg:text-[44px] xl:text-5xl text-slate-900 tracking-tight leading-[1.15] mb-4 text-balance">
+            {/* Main Headline (Scaled Up) */}
+            <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-[52px] xl:text-[58px] text-slate-900 tracking-tight leading-[1.1] mb-5 text-balance">
               <span className="text-primary block">Professionalität, die man sieht.</span>
-              <span className="block text-slate-900 mt-1">Sauberkeit, der man vertraut.</span>
+              <span className="block text-slate-900 mt-1 sm:mt-1.5">Sauberkeit, der man vertraut.</span>
             </h1>
 
-            {/* Supportive Paragraph (Punchy & Streamlined) */}
-            <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-6">
+            {/* Supportive Paragraph */}
+            <p className="font-sans text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl mb-8">
               Erstklassiger Reinigungsservice für Privat und Gewerbe – mit Sitz in Frankfurt am Main und bundesweitem Einsatz. Gründlich, zuverlässig und zu fairen Festpreisen.
             </p>
 
             {/* CTA Button Group */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={handlePrimaryCta}
-                className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-bold text-xs sm:text-sm text-slate-950 bg-accent hover:bg-[#35c9be] px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
+                className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-bold text-sm sm:text-base text-slate-950 bg-accent hover:bg-[#35c9be] px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
               >
                 <span>Angebot anfordern</span>
                 <ArrowRight className="w-4 h-4 text-slate-950 flex-shrink-0" />
@@ -58,7 +58,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
 
               <a
                 href="#services"
-                className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-semibold text-xs sm:text-sm text-slate-800 hover:text-primary bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-primary/30 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-subtle hover:shadow-card transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
+                className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-semibold text-sm sm:text-base text-slate-800 hover:text-primary bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-primary/30 px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl shadow-subtle hover:shadow-card transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
               >
                 <span>Unsere Leistungen</span>
                 <ChevronRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
