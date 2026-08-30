@@ -74,11 +74,15 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
         window.dispatchEvent(new CustomEvent('selectCleaningService', { detail: { service: serviceTitle } }));
-      } else {
-        window.location.href = `mailto:info@obazee-clement-reinigung.de?subject=${encodeURIComponent(
-          `Reinigungsanfrage - ${serviceTitle}`
-        )}`;
       }
+    }
+  };
+
+  const handleBannerCta = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const target = document.getElementById('angebot') || document.getElementById('contact');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -162,7 +166,7 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
           })}
         </div>
 
-        {/* Bottom Callout Banner: Tailored Concept & Email Contact */}
+        {/* Bottom Callout Banner: Tailored Concept & Direct Quote Anchor */}
         <div className="mt-16 sm:mt-20 rounded-3xl bg-gradient-to-r from-[#053a6e] via-[#074b90] to-[#0a5ca8] p-8 sm:p-12 lg:p-14 text-white shadow-2xl relative overflow-hidden border border-white/10">
           {/* Subtle background glow circle */}
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
@@ -177,17 +181,18 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 Ihr maßgeschneidertes Reinigungskonzept
               </h3>
               <p className="font-sans text-sm sm:text-base text-slate-200 leading-relaxed mt-3">
-                Benötigen Sie ein maßgeschneidertes Reinigungskonzept oder feste Turnusse? Senden Sie uns eine E-Mail oder rufen Sie uns direkt an.
+                Benötigen Sie ein maßgeschneidertes Reinigungskonzept oder feste Turnusse? Nutzen Sie unser Online-Formular für ein schnelles Festpreisangebot oder rufen Sie uns direkt an.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-4 w-full lg:w-auto flex-shrink-0">
               <a
-                href="mailto:info@obazee-clement-reinigung.de?subject=Individuelle%20Reinigungsanfrage"
+                href="#angebot"
+                onClick={handleBannerCta}
                 className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#00a3e0] hover:bg-[#0284c7] text-white font-heading font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer whitespace-nowrap"
               >
                 <Mail className="w-5 h-5 text-white flex-shrink-0" />
-                <span>E-Mail Anfrage senden</span>
+                <span>Jetzt Angebot anfordern</span>
               </a>
 
               <a
