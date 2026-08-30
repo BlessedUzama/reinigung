@@ -23,19 +23,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 py-4 sm:py-6 lg:py-8 lg:min-h-[calc(100vh-4.5rem)] flex flex-col justify-center">
+    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/60 py-4 sm:py-6 lg:py-6 lg:min-h-[calc(100vh-4.5rem)] flex flex-col justify-center">
       {/* Ambient background soft glow effects */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-highlight/15 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 left-10 w-80 h-80 bg-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Copy & Conversion */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left">
+          <div className="flex flex-col items-start text-left justify-center">
 
             {/* Main Headline (Top Element in Left Column) */}
-            <h1 className="font-heading font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] text-primary leading-[1.14] tracking-tight text-balance">
+            <h1 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-primary leading-[1.14] tracking-tight text-balance">
               Professionalität, die man sieht.{' '}
               <span className="text-slate-900 block mt-1 sm:mt-1.5">
                 Sauberkeit, der man vertraut.
@@ -85,21 +85,21 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
 
           </div>
 
-          {/* Right Column: Visual Trust Hero Media */}
-          <div className="lg:col-span-5 relative flex items-center justify-center">
+          {/* Right Column: Expanded Visual Trust Hero Media */}
+          <div className="relative flex items-center justify-center w-full h-full">
             
             {/* Visual Frame Container */}
-            <div className="relative w-full max-w-md lg:max-w-none">
+            <div className="relative w-full h-full">
               
               {/* Decorative Accent Glow */}
               <div className="absolute -inset-1.5 bg-gradient-to-tr from-[#3fd2c7] to-[#074b90] rounded-3xl opacity-20 blur-xl -z-10" />
 
               {/* Main Real-World Image (Professional Cleaning Context) */}
-              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-card-hover border border-slate-200/80 bg-slate-100">
+              <div className="relative w-full h-[380px] sm:h-[440px] lg:h-[480px] xl:h-[520px] max-h-[540px] rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-100">
                 <img
                   src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80"
                   alt="Professioneller Reinigungsservice Obazee Clement"
-                  className="w-full h-full max-h-[340px] sm:max-h-[380px] md:max-h-[420px] lg:max-h-[440px] xl:max-h-[480px] object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-[1.02]"
                   loading="eager"
                 />
 
