@@ -32,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Copy & Conversion */}
-          <div className="flex flex-col items-start text-left justify-center pl-0 ml-0">
+          <div className="flex flex-col items-start text-left justify-center">
 
             {/* Main Headline (Scaled Up) */}
             <h1 className="font-heading font-black text-4xl sm:text-5xl lg:text-[52px] xl:text-[58px] text-slate-900 tracking-tight leading-[1.1] mb-5 text-balance">
