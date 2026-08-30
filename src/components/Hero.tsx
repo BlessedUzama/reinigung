@@ -34,27 +34,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
           {/* Left Column: Copy & Conversion */}
           <div className="flex flex-col items-start text-left justify-center">
 
-            {/* Main Headline (Top Element in Left Column) */}
-            <h1 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-primary leading-[1.14] tracking-tight text-balance">
-              Professionalität, die man sieht.{' '}
-              <span className="text-slate-900 block mt-1 sm:mt-1.5">
-                Sauberkeit, der man vertraut.
-              </span>
+            {/* Main Headline (Clean 2-Line Rhythm) */}
+            <h1 className="font-heading font-black text-3xl sm:text-4xl lg:text-[44px] xl:text-5xl text-slate-900 tracking-tight leading-[1.15] mb-4 text-balance">
+              <span className="text-primary block">Professionalität, die man sieht.</span>
+              <span className="block text-slate-900 mt-1">Sauberkeit, der man vertraut.</span>
             </h1>
 
-            {/* Supportive Paragraph */}
-            <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mt-3.5 sm:mt-4">
-              Obazee Clement Reinigung bietet erstklassigen Reinigungsservice für Privat- und Geschäftskunden – mit Hauptsitz in Frankfurt am Main und flexiblen Einsätzen in ganz Deutschland. Wir stehen für Gründlichkeit, Zuverlässigkeit und transparente Festpreise.
+            {/* Supportive Paragraph (Punchy & Streamlined) */}
+            <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-6">
+              Erstklassiger Reinigungsservice für Privat und Gewerbe – mit Sitz in Frankfurt am Main und bundesweitem Einsatz. Gründlich, zuverlässig und zu fairen Festpreisen.
             </p>
 
             {/* CTA Button Group */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 mt-5 sm:mt-6 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-3.5 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={handlePrimaryCta}
-                className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-bold text-xs sm:text-sm text-slate-950 bg-accent hover:bg-[#35c9be] px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
+                className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-bold text-xs sm:text-sm text-slate-950 bg-accent hover:bg-[#35c9be] px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-cta hover:shadow-cta-hover transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
               >
-                <span>Kostenloses Angebot anfordern</span>
+                <span>Angebot anfordern</span>
                 <ArrowRight className="w-4 h-4 text-slate-950 flex-shrink-0" />
               </button>
 
@@ -62,22 +60,22 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
                 href="#services"
                 className="flex flex-row items-center justify-center gap-2 whitespace-nowrap font-heading font-semibold text-xs sm:text-sm text-slate-800 hover:text-primary bg-white hover:bg-slate-50 border border-slate-200/90 hover:border-primary/30 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-subtle hover:shadow-card transition-all duration-200 transform active:scale-[0.98] cursor-pointer"
               >
-                <span>Unsere Leistungen entdecken</span>
+                <span>Unsere Leistungen</span>
                 <ChevronRight className="w-4 h-4 text-slate-400 flex-shrink-0" />
               </a>
             </div>
 
-            {/* Trust Micro-Bullets */}
+            {/* Trust Micro-Bullets (Single-Line Badges) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-slate-200/80 w-full">
-              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                <span>100% Zufriedenheitsgarantie</span>
+                <span>100% Zufriedenheit</span>
               </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">
                 <ShieldCheck className="w-4 h-4 text-primary flex-shrink-0" />
-                <span>Voll versichert & geprüft</span>
+                <span>Geprüft & voll versichert</span>
               </div>
-              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-700 whitespace-nowrap">
                 <Clock className="w-4 h-4 text-primary flex-shrink-0" />
                 <span>Flexible Einsatzzeiten</span>
               </div>
@@ -85,7 +83,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
 
           </div>
 
-          {/* Right Column: Expanded Visual Trust Hero Media */}
+          {/* Right Column: Visual Trust Hero Media */}
           <div className="relative flex items-center justify-center w-full h-full">
             
             {/* Visual Frame Container */}
