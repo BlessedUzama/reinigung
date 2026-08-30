@@ -38,7 +38,7 @@ const servicesData: ServiceItem[] = [
     title: 'Büro- & Gewerbereinigung',
     badge: 'Gewerbe & Praxis',
     icon: Building2,
-    description: 'Repräsentative Sauberkeit und kompromisslose Hygiene für Büros, Kanzleien, Praxen und gewerbliche Räumlichkeiten in Frankfurt.',
+    description: 'Repräsentative Sauberkeit und kompromisslose Hygiene für Büros, Kanzleien, Praxen und gewerbliche Räumlichkeiten in Frankfurt am Main und bundesweit.',
     features: [
       'Tägliche oder wöchentliche Büroreinigung',
       'Hygienische Desinfektion von Arbeitsplätzen & IT',
@@ -107,7 +107,7 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
           </h2>
 
           <p className="font-sans text-base sm:text-lg text-slate-600 leading-relaxed mt-5">
-            Entdecken Sie unsere drei maßgeschneiderten Hauptbereiche. Ob privater Haushalt oder Gewerbeobjekt – wir garantieren höchste Gründlichkeit, Pünktlichkeit und faire Festpreise.
+            Entdecken Sie unsere drei maßgeschneiderten Hauptbereiche – mit Sitz in Frankfurt am Main und bundesweiten Einsätzen in ganz Deutschland. Wir garantieren höchste Gründlichkeit, Pünktlichkeit und faire Festpreise.
           </p>
         </div>
 
@@ -181,7 +181,7 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
                 Ihr maßgeschneidertes Reinigungskonzept
               </h3>
               <p className="font-sans text-sm sm:text-base text-slate-200 leading-relaxed mt-3">
-                Benötigen Sie ein maßgeschneidertes Reinigungskonzept oder feste Turnusse? Nutzen Sie unser Online-Formular für ein schnelles Festpreisangebot oder rufen Sie uns direkt an.
+                Benötigen Sie ein maßgeschneidertes Reinigungskonzept oder feste Turnusse? Wir bieten flexible Reinigungslösungen mit Sitz in Frankfurt am Main und bundesweiten Einsätzen in ganz Deutschland.
               </p>
             </div>
 

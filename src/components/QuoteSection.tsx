@@ -181,7 +181,7 @@ export const QuoteSection: React.FC = () => {
           </h2>
 
           <p className="font-sans text-sm sm:text-base text-slate-600 leading-relaxed mt-2 max-w-2xl mx-auto">
-            Wählen Sie Ihre gewünschten Reinigungsleistungen aus – wir erstellen Ihr maßgeschneidertes Angebot innerhalb von 24 Stunden.
+            Wählen Sie Ihre gewünschten Reinigungsleistungen aus – Zentrale in Frankfurt am Main, flexibler Service in ganz Deutschland. Wir erstellen Ihr maßgeschneidertes Angebot innerhalb von 24 Stunden.
           </p>
         </div>
 
@@ -370,7 +370,7 @@ export const QuoteSection: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="z.B. 60311 Frankfurt"
+                    placeholder="z.B. 60311 Frankfurt oder bundesweit"
                     value={location}
                     disabled={status === 'loading'}
                     onChange={(e) => setLocation(e.target.value)}
@@ -503,7 +503,7 @@ export const QuoteSection: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-                    <span>Feste Endpreise</span>
+                    <span>Deutschlandweit im Einsatz</span>
                   </div>
                 </div>
               </div>

@@ -44,7 +44,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBookingModal }) => {
 
             {/* Supportive Paragraph */}
             <p className="font-sans text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mt-5 sm:mt-6">
-              Obazee Clement Reinigung bietet erstklassigen Reinigungsservice für Privat- und Geschäftskunden in Frankfurt und Umgebung. Wir stehen für Gründlichkeit, Zuverlässigkeit und transparente Festpreise.
+              Obazee Clement Reinigung bietet erstklassigen Reinigungsservice für Privat- und Geschäftskunden – mit Hauptsitz in Frankfurt am Main und flexiblen Einsätzen in ganz Deutschland. Wir stehen für Gründlichkeit, Zuverlässigkeit und transparente Festpreise.
             </p>
 
             {/* CTA Button Group */}
