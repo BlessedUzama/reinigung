@@ -78,7 +78,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onCtaClick }) => {
             </a>
 
             {/* Center: Navigation Links (Desktop) */}
-            <nav className="hidden md:flex items-center gap-8 lg:gap-10 text-sm font-medium text-slate-700 leading-none font-sans" aria-label="Hauptnavigation">
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8 ml-8 lg:ml-12 text-sm font-medium text-slate-700 leading-none font-sans" aria-label="Hauptnavigation">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
