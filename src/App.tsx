@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import About from './components/About';
 import QuoteSection from './components/QuoteSection';
 
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
       <main className="pt-16 sm:pt-20">
         <Hero />
         <Services />
+        <About />
         <QuoteSection />
       </main>
     </div>
