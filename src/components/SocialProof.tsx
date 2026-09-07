@@ -8,6 +8,8 @@ import {
   Quote,
   Sparkles
 } from 'lucide-react';
+import beforeImg from '../assets/before.jpeg';
+import afterImg from '../assets/after.jpeg';
 
 export const SocialProof: React.FC = () => {
   // Slider position from 0 to 100 (percentage showing Before)
@@ -129,7 +131,7 @@ export const SocialProof: React.FC = () => {
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Vorher (100%)
+                Vorher
               </button>
               <button
                 type="button"
@@ -140,7 +142,7 @@ export const SocialProof: React.FC = () => {
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Vergleich (50%)
+                Vergleich 50%
               </button>
               <button
                 type="button"
@@ -151,44 +153,39 @@ export const SocialProof: React.FC = () => {
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
-                Nachher (100%)
+                Nachher
               </button>
             </div>
           </div>
 
           {/* Interactive Split-Image Frame */}
-          <div className="relative w-full h-[280px] sm:h-[380px] lg:h-[440px] rounded-2xl overflow-hidden select-none shadow-md border border-slate-200">
-            {/* 1. AFTER Image (Background Layer - Crisp & Natural) */}
+          <div className="relative w-full aspect-[16/9] max-h-[520px] rounded-2xl overflow-hidden select-none shadow-md border border-slate-200">
+            {/* 1. AFTER Image (Base / Background Layer - Raw & Natural) */}
             <img
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
-              alt="Nachher: Hygienisch rein, glänzend versiegelt und bezugsfertig"
+              src={afterImg}
+              alt="Nachher: Gründlich gereinigt, hygienisch sauber und glänzend"
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Nachher Badge */}
             <div className="absolute top-4 right-4 z-10 px-3.5 py-1.5 rounded-full bg-emerald-600/90 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading flex items-center gap-1.5">
               <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-              <span>Nachher (Hygienisch rein &amp; glänzend)</span>
+              <span>Nachher (Gereinigt)</span>
             </div>
 
-            {/* 2. BEFORE Image (Clipped Layer - Identical image with realistic uncleaned/dusty filter) */}
+            {/* 2. BEFORE Image (Clipped Overlay Layer - Raw & Natural) */}
             <div
               className="absolute inset-0 transition-[clip-path] duration-75 ease-out overflow-hidden"
               style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
             >
               <img
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
-                alt="Vorher: Baustaub, matte Fliesen und Schmutzrückstände"
-                className="w-full h-full object-cover"
-                style={{
-                  filter: 'brightness(0.85) contrast(0.88) sepia(0.22) saturate(0.8)',
-                }}
+                src={beforeImg}
+                alt="Vorher: Unbehandelt vor der professionellen Reinigung"
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              {/* Subtle semi-transparent overlay to enhance the matte dust effect */}
-              <div className="absolute inset-0 bg-amber-950/10 mix-blend-multiply pointer-events-none" />
 
               {/* Vorher Badge */}
               <div className="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-slate-900/85 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading">
-                Vorher (Baustaub &amp; Rückstände)
+                Vorher (Vor Reinigung)
               </div>
             </div>
 
@@ -216,7 +213,7 @@ export const SocialProof: React.FC = () => {
 
           <div className="mt-3 flex items-center justify-between text-xs text-slate-500 font-sans">
             <span className="hidden sm:inline">Tipp: Ziehen Sie den Schieberegler oder nutzen Sie die Schnellwahl-Buttons.</span>
-            <span className="sm:ml-auto">Objektbeispiel: Grund- und Feinreinigung nach Innenausbau</span>
+            <span className="sm:ml-auto">Objektbeispiel: Intensive Küchenreinigung &amp; Entfettung</span>
           </div>
         </div>
 
