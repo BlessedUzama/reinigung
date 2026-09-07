@@ -7,8 +7,7 @@ import {
   FileText,
   Calculator,
   CheckCircle2,
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from 'lucide-react';
 
 export const About: React.FC = () => {
@@ -82,12 +81,6 @@ export const About: React.FC = () => {
         {/* 1. TOP BLOCK: Company Profile & Core Values                               */}
         {/* ========================================================================= */}
         <div className="text-center max-w-3xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-4 font-heading">
-            <ShieldCheck className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-            <span>Über uns</span>
-          </div>
-
           {/* Headline */}
           <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight leading-[1.15]">
             Präzision, Sorgfalt und{' '}
@@ -132,11 +125,6 @@ export const About: React.FC = () => {
           
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent/15 border border-accent/30 text-slate-900 text-xs font-bold uppercase tracking-wider mb-4 font-heading">
-              <Sparkles className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-              <span>Einfach &amp; Transparent</span>
-            </div>
-
             <h3 className="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 tracking-tight leading-snug">
               In 3 Schritten zum sauberen Objekt
             </h3>

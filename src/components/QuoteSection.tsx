@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Sparkles,
   ShieldCheck,
   CheckCircle2,
   Clock,
@@ -171,11 +170,6 @@ export const QuoteSection: React.FC = () => {
         
         {/* Header Section */}
         <div className="text-center mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/5 border border-primary/15 text-primary text-xs font-bold uppercase tracking-wider mb-3 font-heading">
-            <Sparkles className="w-3.5 h-3.5 text-primary flex-shrink-0" />
-            <span>Unverbindlich & Kostenlos</span>
-          </div>
-
           <h2 className="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-slate-900 tracking-tight leading-snug">
             Kostenloses Festpreisangebot anfordern
           </h2>
