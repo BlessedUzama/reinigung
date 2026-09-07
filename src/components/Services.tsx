@@ -4,9 +4,7 @@ import {
   Building2,
   Maximize,
   CheckCircle2,
-  ArrowRight,
-  Mail,
-  Phone
+  ArrowRight
 } from 'lucide-react';
 
 interface ServiceItem {
@@ -77,16 +75,8 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
     }
   };
 
-  const handleBannerCta = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const target = document.getElementById('angebot') || document.getElementById('contact');
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section id="services" className="bg-slate-50 py-20 sm:py-28 relative overflow-hidden">
+    <section id="services" className="bg-slate-50 pt-16 sm:pt-24 pb-12 sm:pb-16 relative overflow-hidden">
       {/* Decorative ambient background accents */}
       <div className="absolute top-1/3 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -158,46 +148,6 @@ export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom Callout Banner: Tailored Concept & Direct Quote Anchor */}
-        <div className="mt-16 sm:mt-20 rounded-3xl bg-gradient-to-r from-[#053a6e] via-[#074b90] to-[#0a5ca8] p-8 sm:p-12 lg:p-14 text-white shadow-2xl relative overflow-hidden border border-white/10">
-          {/* Subtle background glow circle */}
-          <div className="absolute -top-24 -right-24 w-80 h-80 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-highlight/20 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-            <div className="text-left max-w-2xl">
-              <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-white/15 text-highlight mb-3 uppercase tracking-wider font-heading">
-                Individuelle Anforderungen?
-              </span>
-              <h3 className="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-tight">
-                Ihr maßgeschneidertes Reinigungskonzept
-              </h3>
-              <p className="font-sans text-sm sm:text-base text-slate-200 leading-relaxed mt-3">
-                Benötigen Sie ein maßgeschneidertes Reinigungskonzept oder feste Turnusse? Wir bieten flexible Reinigungslösungen mit Sitz in Frankfurt am Main und bundesweiten Einsätzen in ganz Deutschland.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-4 w-full lg:w-auto flex-shrink-0">
-              <a
-                href="#angebot"
-                onClick={handleBannerCta}
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-[#00a3e0] hover:bg-[#0284c7] text-white font-heading font-bold text-sm sm:text-base shadow-lg hover:shadow-xl transition-all duration-200 active:scale-[0.98] cursor-pointer whitespace-nowrap"
-              >
-                <Mail className="w-5 h-5 text-white flex-shrink-0" />
-                <span>Jetzt Angebot anfordern</span>
-              </a>
-
-              <a
-                href="tel:+4915210236967"
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-heading font-bold text-sm sm:text-base border border-white/20 transition-all duration-200 active:scale-[0.98] cursor-pointer whitespace-nowrap"
-              >
-                <Phone className="w-4 h-4 text-white flex-shrink-0" />
-                <span>+49 1521 0236967</span>
-              </a>
-            </div>
-          </div>
         </div>
 
       </div>
