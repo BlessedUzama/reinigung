@@ -167,7 +167,11 @@ export const SocialProof: React.FC = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Nachher Badge */}
-            <div className="absolute top-4 right-4 z-10 px-3.5 py-1.5 rounded-full bg-emerald-600/90 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading flex items-center gap-1.5">
+            <div
+              className={`absolute top-4 right-4 z-10 select-none px-3.5 py-1.5 rounded-full bg-emerald-600/90 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading flex items-center gap-1.5 transition-opacity duration-200 ${
+                sliderPos > 82 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+              }`}
+            >
               <CheckCircle2 className="w-3.5 h-3.5 text-white" />
               <span>Nachher (Gereinigt)</span>
             </div>
@@ -184,7 +188,11 @@ export const SocialProof: React.FC = () => {
               />
 
               {/* Vorher Badge */}
-              <div className="absolute top-4 left-4 z-10 px-3.5 py-1.5 rounded-full bg-slate-900/85 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading">
+              <div
+                className={`absolute top-4 left-4 z-10 select-none px-3.5 py-1.5 rounded-full bg-slate-900/85 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading transition-opacity duration-200 ${
+                  sliderPos < 18 ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                }`}
+              >
                 Vorher (Vor Reinigung)
               </div>
             </div>
