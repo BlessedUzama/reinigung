@@ -160,46 +160,46 @@ export const SocialProof: React.FC = () => {
 
           {/* Interactive Split-Image Frame */}
           <div className="relative w-full aspect-[16/9] max-h-[520px] rounded-2xl overflow-hidden select-none shadow-md border border-slate-200">
-            {/* 1. AFTER Image (Base / Background Layer - Raw & Natural) */}
-            <img
-              src={afterImg}
-              alt="Nachher: Gründlich gereinigt, hygienisch sauber und glänzend"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            {/* Nachher Badge */}
+            {/* 1. NACHHER Layer (Right side container, clipped from sliderPos to 100%) */}
             <div
-              className={`absolute top-4 right-4 z-10 select-none px-3.5 py-1.5 rounded-full bg-emerald-600/90 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading flex items-center gap-1.5 transition-opacity duration-200 ${
-                sliderPos > 82 ? 'opacity-0 pointer-events-none' : 'opacity-100'
-              }`}
+              className="absolute inset-0 select-none overflow-hidden"
+              style={{ clipPath: `polygon(${sliderPos}% 0, 100% 0, 100% 100%, ${sliderPos}% 100%)` }}
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-white" />
-              <span>Nachher (Gereinigt)</span>
+              <img
+                src={afterImg}
+                alt="Nachher: Gründlich gereinigt, hygienisch sauber und glänzend"
+                className="w-full h-full object-cover"
+              />
+              {/* Badge is inside the clipped layer */}
+              <div className="absolute top-4 right-4 z-10">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider bg-emerald-600/90 text-white backdrop-blur-md shadow-md whitespace-nowrap">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-white" />
+                  <span>Nachher (Gereinigt)</span>
+                </span>
+              </div>
             </div>
 
-            {/* 2. BEFORE Image (Clipped Overlay Layer - Raw & Natural) */}
+            {/* 2. VORHER Layer (Left side container, clipped from 0 to sliderPos) */}
             <div
-              className="absolute inset-0 transition-[clip-path] duration-75 ease-out overflow-hidden"
-              style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
+              className="absolute inset-0 select-none overflow-hidden"
+              style={{ clipPath: `polygon(0 0, ${sliderPos}% 0, ${sliderPos}% 100%, 0 100%)` }}
             >
               <img
                 src={beforeImg}
                 alt="Vorher: Unbehandelt vor der professionellen Reinigung"
-                className="absolute inset-0 w-full h-full object-cover"
+                className="w-full h-full object-cover"
               />
-
-              {/* Vorher Badge */}
-              <div
-                className={`absolute top-4 left-4 z-10 select-none px-3.5 py-1.5 rounded-full bg-slate-900/85 text-white text-xs font-bold uppercase tracking-wider backdrop-blur-sm shadow-sm font-heading transition-opacity duration-200 ${
-                  sliderPos < 18 ? 'opacity-0 pointer-events-none' : 'opacity-100'
-                }`}
-              >
-                Vorher (Vor Reinigung)
+              {/* Badge is inside the clipped layer */}
+              <div className="absolute top-4 left-4 z-10">
+                <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider bg-slate-900/85 text-white backdrop-blur-md shadow-md whitespace-nowrap">
+                  Vorher (Vor Reinigung)
+                </span>
               </div>
             </div>
 
-            {/* 3. Divider Line & Interactive Handle */}
+            {/* 3. Divider Line & Interactive Handle at z-30 */}
             <div
-              className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_12px_rgba(0,0,0,0.45)] z-20 pointer-events-none transition-all duration-75 ease-out"
+              className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_12px_rgba(0,0,0,0.45)] z-30 pointer-events-none"
               style={{ left: `${sliderPos}%` }}
             >
               <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center shadow-xl border-2 border-primary/40 pointer-events-none">
@@ -207,14 +207,14 @@ export const SocialProof: React.FC = () => {
               </div>
             </div>
 
-            {/* 4. Invisible Range Input for Drag Interaction */}
+            {/* 4. Invisible Range Input for Drag Interaction at z-40 */}
             <input
               type="range"
               min="0"
               max="100"
               value={sliderPos}
               onChange={(e) => setSliderPos(Number(e.target.value))}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30 m-0 p-0"
+              className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-40 m-0 p-0"
               aria-label="Vorher-Nachher Bilderschieberegler"
             />
           </div>
