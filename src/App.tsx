@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import About from './components/About';
+import SocialProof from './components/SocialProof';
 import QuoteSection from './components/QuoteSection';
 import Footer from './components/Footer';
 
@@ -13,6 +14,7 @@ export default function App() {
         <Hero />
         <Services />
         <About />
+        <SocialProof />
         <QuoteSection />
       </main>
       <Footer />

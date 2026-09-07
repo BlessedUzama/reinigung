@@ -132,7 +132,6 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                 <div className="text-slate-700 text-sm space-y-1">
                   <p className="font-semibold text-slate-900">Obazee Clement Reinigung</p>
                   <p>Inhaber: Clement Obazee</p>
-                  <p>[Straße und Hausnummer ergänzen]</p>
                   <p>60311 Frankfurt am Main, Deutschland</p>
                 </div>
               </div>
