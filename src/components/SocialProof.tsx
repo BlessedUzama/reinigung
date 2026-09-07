@@ -5,8 +5,7 @@ import {
   CheckCircle2,
   Lock,
   ChevronsLeftRight,
-  Quote,
-  Sparkles
+  Quote
 } from 'lucide-react';
 import beforeImg from '../assets/before.jpeg';
 import afterImg from '../assets/after.jpeg';
@@ -111,10 +110,6 @@ export const SocialProof: React.FC = () => {
         <div className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-slate-200/90 shadow-card mb-12 sm:mb-16">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary font-heading mb-1">
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
-                <span>Echtes Qualitätsversprechen</span>
-              </div>
               <h3 className="font-heading font-bold text-xl sm:text-2xl text-slate-900 tracking-tight">
                 Sichtbarer Vorher-Nachher-Unterschied
               </h3>
